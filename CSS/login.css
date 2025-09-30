@@ -1,0 +1,107 @@
+/* --------- Paleta --------- */
+:root{
+  --left:  #cfadb7;      /* fundo login */
+  --right: #b198a6;      /* fundo logo */
+  --card:  #e3cba1;      /* cartão formulário */
+  --input-bg: #ffffff;
+  --btn:   #b5888f;
+  --btn-text: #2c2222;
+  --label: #2b2418;
+  --logo-box: #d8c9d0;
+}
+
+/* --------- Layout --------- */
+body{ background: var(--left); }
+
+/* As colunas são .col-12 por padrão (empilhadas). 
+   Em telas lg+ viram 70/30 ajustando flex-basis e max-width (grid do Bootstrap usa flex). */
+.login-col{
+  background: var(--left);
+  padding: 24px;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+.logo-col{
+  background: var(--right);
+  padding: 24px;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 992px){ /* lg */
+  .login-col{ flex: 0 0 70%; max-width: 70%; min-height: 100vh; }
+  .logo-col { flex: 0 0 30%; max-width: 30%; min-height: 100vh; }
+}
+
+/* --------- Cartão do formulário --------- */
+.form-card{
+  background: var(--card);
+  width: min(360px, 76%);
+  border-radius: 22px;
+  padding: clamp(18px, 4vw, 36px);
+}
+
+/* Labels / Inputs / Botão */
+.label-small{
+  font-size: 1.05rem;
+  color: var(--label);
+  margin-bottom: 6px;
+}
+
+.input-pill{
+  background: var(--input-bg);
+  border: none;
+  border-radius: 999px;
+  padding: 0 18px;
+  height: 48px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.05);
+}
+
+.btn-pill{
+  border-radius: 999px !important;
+  background: var(--btn) !important;
+  border: none !important;
+  color: var(--btn-text) !important;
+  font-weight: 600;
+  height: 44px;
+}
+
+/* --------- Box do logo --------- */
+.logo-box{
+  width: min(460px, 86%);
+  aspect-ratio: 1 / 1;
+  background: var(--logo-box);
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.05);
+  padding: 24px;
+  text-align: center;
+}
+
+.logo-script{
+  display: block;
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 300;
+  font-family: "Segoe Script", "Brush Script MT", cursive;
+  color: #b3868e;
+  line-height: 1;
+}
+
+.logo-sub{
+  font-size: clamp(11px, 2vw, 14px);
+  letter-spacing: .35em;
+  color: #8a6d74;
+  margin-top: 8px;
+}
+
+/* Links abaixo do botão */
+.link-option {
+  font-size: 0.95rem;
+  color: #5a3d44; /* tom sóbrio dentro da paleta */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-option:hover {
+  text-decoration: underline;
+  color: #2c2222;
+}

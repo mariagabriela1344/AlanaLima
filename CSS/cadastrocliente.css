@@ -1,0 +1,72 @@
+/* Paleta (harmoniza com as telas anteriores) */
+:root{
+  --left:  #cfadb7;    /* fundo geral */
+  --right: #b198a6;    /* fundo carrossel */
+  --card:  #ffffff;    /* cartão claro do formulário */
+  --btn:   #b5888f;    /* botão rosado */
+  --btn-text: #2c2222; /* texto do botão */
+  --label: #2b2418;    /* rótulos */
+  --input-bg: #d3b2bf; /* tom das bordas arredondadas */
+}
+
+/* fundos */
+.bg-app{ background: var(--left); }
+.pane-left{ background: var(--left); padding: clamp(12px, 3vw, 32px); }
+.pane-right{ background: var(--right); padding: clamp(12px, 3vw, 32px); }
+
+/* cartão do formulário */
+.form-wrapper{
+  background: var(--card);
+  width: min(880px, 96%);
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.07);
+}
+
+/* labels/inputs */
+.label-small{ color: var(--label); }
+.input-pill{
+  border: none;
+  background: #fff;
+  box-shadow: inset 0 0 0 2px rgba(211,178,191,.85);
+  border-radius: 999px;
+  height: 46px;
+  padding: 0 16px;
+}
+
+/* botão principal */
+.btn-pill{
+  border-radius: 999px !important;
+  background: var(--btn) !important;
+  color: var(--btn-text) !important;
+  border: none !important;
+  height: 44px;
+  font-weight: 600;
+}
+
+/* links auxiliares */
+.link-option{
+  color: #5a3d44;
+  text-decoration: none;
+  font-weight: 500;
+}
+.link-option:hover{ text-decoration: underline; }
+
+/* carrossel/banners */
+.banner-box{
+  width: min(620px, 92%);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #e7dce1;
+}
+.banner-box .carousel-item img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 16 / 9; /* mantém proporção agradável */
+}
+
+/* responsividade extra: garantir altura agradável em telas altas */
+@media (min-height: 760px){
+  .pane-left, .pane-right{ min-height: 100vh; }
+}

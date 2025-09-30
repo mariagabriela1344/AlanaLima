@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amanda Closet — Home</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- CSS da página -->
+  <link rel="stylesheet" href="../css/homecliente.css">
+</head>
+<body class="bg-app">
+
+  <!-- Header / Navbar -->
+  <header class="navbar navbar-expand-lg topbar shadow-sm">
+    <div class="container-xxl">
+      <a class="navbar-brand fw-semibold" href="#">
+        <span class="logo-script">Amanda</span> <span class="logo-sub ms-1">CLOSET</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMain">
+        <form class="d-flex ms-lg-4 my-3 my-lg-0 flex-grow-1" role="search">
+          <input class="form-control search-input me-2" type="search" placeholder="Buscar produtos..." aria-label="Buscar">
+          <button class="btn btn-outline-dark rounded-pill" type="submit"><i class="bi bi-search"></i></button>
+        </form>
+
+        <ul class="navbar-nav ms-lg-3 align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link icon-link" href="#" title="Carrinho"><i class="bi bi-bag"></i><span class="d-lg-none ms-2">Carrinho</span></a></li>
+          <li class="nav-item"><a class="nav-link icon-link" href="#" title="Favoritos"><i class="bi bi-heart"></i><span class="d-lg-none ms-2">Favoritos</span></a></li>
+          <li class="nav-item"><a class="nav-link icon-link" href="#" title="Chat"><i class="bi bi-chat-dots"></i><span class="d-lg-none ms-2">Chat</span></a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link icon-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" title="Perfil">
+              <i class="bi bi-person"></i><span class="d-lg-none ms-2">Perfil</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#">Minha conta</a></li>
+              <li><a class="dropdown-item" href="#">Meus pedidos</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Sair</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Banners -->
+    <section class="container-xxl my-3 my-lg-4">
+      <div id="heroCarousel" class="carousel slide hero rounded-3 overflow-hidden shadow-sm" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-label="Banner 1"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Banner 2"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Banner 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="4500">
+            <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1600&auto=format&fit=crop" class="d-block w-100" alt="Coleção Casual">
+          </div>
+          <div class="carousel-item" data-bs-interval="4500">
+            <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=80&w=1600&auto=format&fit=crop" class="d-block w-100" alt="Novidades">
+          </div>
+          <div class="carousel-item" data-bs-interval="4500">
+            <img src="https://images.unsplash.com/photo-1520975922323-254f5329b660?q=80&w=1600&auto=format&fit=crop" class="d-block w-100" alt="Acessórios">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Próximo</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Categorias -->
+    <section class="container-xxl my-4">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <h2 class="h5 m-0">Categorias</h2>
+        <a class="link-more" href="#">ver todas</a>
+      </div>
+
+      <div class="category-strip gap-3">
+        <!-- Item de categoria (repita conforme necessário) -->
+        <a href="#" class="cat-item text-center">
+          <span class="cat-thumb" style="background-image:url('https://images.unsplash.com/photo-1516826957135-700dedea698c?q=80&w=600&auto=format&fit=crop');"></span>
+          <small class="d-block mt-2 text-muted">Vestidos</small>
+        </a>
+
+        <a href="#" class="cat-item text-center">
+          <span class="cat-thumb" style="background-image:url('https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=600&auto=format&fit=crop');"></span>
+          <small class="d-block mt-2 text-muted">Casacos</small>
+        </a>
+
+        <a href="#" class="cat-item text-center">
+          <span class="cat-thumb" style="background-image:url('https://images.unsplash.com/photo-1520975960082-6f2a4a2d5b05?q=80&w=600&auto=format&fit=crop');"></span>
+          <small class="d-block mt-2 text-muted">Shorts</small>
+        </a>
+
+        <a href="#" class="cat-item text-center">
+          <span class="cat-thumb" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=600&auto=format&fit=crop');"></span>
+          <small class="d-block mt-2 text-muted">Camisas</small>
+        </a>
+
+        <a href="#" class="cat-item text-center">
+          <span class="cat-thumb" style="background-image:url('https://images.unsplash.com/photo-1503342217505-b0a15cf70489?q=80&w=600&auto=format&fit=crop');"></span>
+          <small class="d-block mt-2 text-muted">Acessórios</small>
+        </a>
+      </div>
+    </section>
+
+    <!-- Produtos -->
+    <section class="container-xxl my-4">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <h2 class="h5 m-0">Ofertas da semana</h2>
+        <a class="link-more" href="#">ver mais</a>
+      </div>
+
+      <div class="row g-3">
+        <!-- Card de produto (replicar) -->
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="card product-card h-100">
+            <div class="ratio ratio-4x3">
+              <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=800&auto=format&fit=crop" class="rounded-top img-cover" alt="Vestido Floral">
+            </div>
+            <div class="card-body">
+              <h3 class="product-title">Vestido floral</h3>
+              <div class="product-colors mb-1">
+                <span class="dot" style="--c:#000;"></span>
+                <span class="dot" style="--c:#d07b7b;"></span>
+                <span class="dot" style="--c:#e6cdb4;"></span>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                <span class="price">R$ 159,90</span>
+                <button class="btn btn-sm btn-outline-dark rounded-pill"><i class="bi bi-bag-plus"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="card product-card h-100">
+            <div class="ratio ratio-4x3">
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop" class="rounded-top img-cover" alt="Macacão">
+            </div>
+            <div class="card-body">
+              <h3 class="product-title">Macacão alfaiataria</h3>
+              <div class="product-colors mb-1">
+                <span class="dot" style="--c:#2f2f2f;"></span>
+                <span class="dot" style="--c:#8c5c4a;"></span>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                <span class="price">R$ 199,90</span>
+                <button class="btn btn-sm btn-outline-dark rounded-pill"><i class="bi bi-bag-plus"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="card product-card h-100">
+            <div class="ratio ratio-4x3">
+              <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=80&w=800&auto=format&fit=crop" class="rounded-top img-cover" alt="Casaco">
+            </div>
+            <div class="card-body">
+              <h3 class="product-title">Casaco cozy</h3>
+              <div class="product-colors mb-1">
+                <span class="dot" style="--c:#b78754;"></span>
+                <span class="dot" style="--c:#e5d4c6;"></span>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                <span class="price">R$ 259,00</span>
+                <button class="btn btn-sm btn-outline-dark rounded-pill"><i class="bi bi-bag-plus"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="card product-card h-100">
+            <div class="ratio ratio-4x3">
+              <img src="https://images.unsplash.com/photo-1520975960082-6f2a4a2d5b05?q=80&w=800&auto=format&fit=crop" class="rounded-top img-cover" alt="Short alfaiataria">
+            </div>
+            <div class="card-body">
+              <h3 class="product-title">Short alfaiataria</h3>
+              <div class="product-colors mb-1">
+                <span class="dot" style="--c:#0c4a6e;"></span>
+                <span class="dot" style="--c:#000;"></span>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                <span class="price">R$ 89,90</span>
+                <button class="btn btn-sm btn-outline-dark rounded-pill"><i class="bi bi-bag-plus"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer mt-5">
+    <div class="container-xxl py-4">
+      <div class="row align-items-center gy-3">
+        <div class="col-12 col-lg-6 text-center text-lg-start">
+          <div class="fw-semibold">Siga a Amanda Closet</div>
+          <div class="text-muted small">Novidades, promoções e muito mais.</div>
+        </div>
+        <div class="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-end gap-3">
+          <a class="social" href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a class="social" href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a class="social" href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+          <a class="social" href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        </div>
+      </div>
+      <hr class="my-3">
+      <div class="text-center text-muted small">© <span id="y"></span> Amanda Closet — Todos os direitos reservados.</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ano no rodapé
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

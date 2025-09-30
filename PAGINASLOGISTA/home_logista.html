@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amanda Closet — Painel do Logista</title>
+
+  <!-- Bootstrap 5 + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Estilos desta página -->
+  <link rel="stylesheet" href="../CSS/home_logista.css">
+</head>
+<body class="bg-dash">
+
+  <!-- Header (exclusivo do logista) -->
+  <header class="navbar navbar-expand-lg dashbar">
+    <div class="container-xxl">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <div class="brand-badge">AC</div>
+        <div class="brand-text">Amanda Closet <span class="sub">Logista</span></div>
+      </a>
+
+      <button class="navbar-toggler border-0 shadow-none text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navDash">
+        <i class="bi bi-list fs-2"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navDash">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#relatorios"><i class="bi bi-graph-up-arrow me-1"></i>Relatórios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pagamentos"><i class="bi bi-cash-coin me-1"></i>Pagamentos & Fretes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#chat"><i class="bi bi-chat-dots me-1"></i>Chat</a></li>
+          <li class="nav-item"><a class="nav-link" href="#promocoes"><i class="bi bi-stars me-1"></i>Promoções</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="bi bi-person-gear me-1"></i>Minha conta</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#">Perfil</a></li>
+              <li><a class="dropdown-item" href="#">Preferências</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="#">Sair</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="container-xxl my-4">
+    <!-- Cabeçalho da página -->
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+      <h1 class="h4 m-0">Visão geral</h1>
+      <div class="d-flex gap-2">
+        <input type="date" class="form-control form-control-sm pill" id="dtIni">
+        <input type="date" class="form-control form-control-sm pill" id="dtFim">
+        <button class="btn btn-sm btn-dark pill" id="btnAplicar">Aplicar</button>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <section class="row g-3">
+      <div class="col-6 col-lg-3">
+        <div class="kpi card shadow-sm">
+          <div class="card-body">
+            <div class="kpi-label">Receita do dia</div>
+            <div class="kpi-value" id="kpiReceita">R$ 0,00</div>
+            <div class="kpi-trend text-success"><i class="bi bi-arrow-up-right"></i> +12% vs. ontem</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="kpi card shadow-sm">
+          <div class="card-body">
+            <div class="kpi-label">Pedidos do dia</div>
+            <div class="kpi-value" id="kpiPedidos">0</div>
+            <div class="kpi-trend text-success"><i class="bi bi-arrow-up-right"></i> +8%</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="kpi card shadow-sm">
+          <div class="card-body">
+            <div class="kpi-label">Ticket médio</div>
+            <div class="kpi-value" id="kpiTicket">R$ 0,00</div>
+            <div class="kpi-trend text-muted">—</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="kpi card shadow-sm">
+          <div class="card-body">
+            <div class="kpi-label">Itens vendidos</div>
+            <div class="kpi-value" id="kpiItens">0</div>
+            <div class="kpi-trend text-danger"><i class="bi bi-arrow-down-right"></i> -3%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Relatórios (gráficos) -->
+    <section id="relatorios" class="row g-3 mt-1">
+      <div class="col-12 col-lg-7">
+        <div class="card shadow-sm h-100">
+          <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+            <span class="fw-semibold">Vendas — últimos 7 dias</span>
+            <span class="text-muted small" id="rangeTxt">últimos 7 dias</span>
+          </div>
+          <div class="card-body">
+            <canvas id="chartVendas" height="120"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-5">
+        <div class="card shadow-sm h-100">
+          <div class="card-header bg-white border-0">
+            <span class="fw-semibold">Receita por categoria</span>
+          </div>
+          <div class="card-body">
+            <canvas id="chartCategorias" height="120"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vendas do dia -->
+    <section class="mt-4">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <h2 class="h5 m-0">Vendas do dia</h2>
+        <a class="btn btn-sm btn-outline-dark pill" href="#">Exportar .CSV</a>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="table-responsive">
+          <table class="table align-middle table-hover m-0">
+            <thead class="table-light">
+              <tr>
+                <th>Pedido</th>
+                <th>Hora</th>
+                <th>Cliente</th>
+                <th>Itens</th>
+                <th>Total</th>
+                <th>Pagamento</th>
+                <th>Status</th>
+                <th class="text-end">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tbHoje">
+              <!-- preenchido via JS com exemplos -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vendas para entregar -->
+    <section id="pagamentos" class="mt-4">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <h2 class="h5 m-0">Vendas para entregar</h2>
+        <a class="btn btn-sm btn-outline-dark pill" href="#"><i class="bi bi-truck me-1"></i>Gerenciar envios</a>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="table-responsive">
+          <table class="table align-middle m-0">
+            <thead class="table-light">
+              <tr>
+                <th>Pedido</th>
+                <th>Cliente</th>
+                <th>Cidade/UF</th>
+                <th>Frete</th>
+                <th>Previsão</th>
+                <th>Status</th>
+                <th class="text-end">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tbEntregas">
+              <!-- preenchido via JS com exemplos -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Âncoras vazias para navegação do header -->
+    <section id="chat" class="mt-5"></section>
+    <section id="promocoes" class="mt-5"></section>
+  </main>
+
+  <!-- Rodapé (exclusivo do logista) -->
+  <footer class="dash-footer mt-5">
+    <div class="container-xxl py-4">
+      <div class="row gy-3 align-items-center">
+        <div class="col-12 col-lg-6">
+          <div class="fw-semibold">Central do Logista</div>
+          <div class="text-muted small">Relatórios • Pagamentos & Fretes • Chat • Promoções</div>
+        </div>
+        <div class="col-12 col-lg-6 d-flex justify-content-lg-end gap-3">
+          <a href="#relatorios" class="f-link"><i class="bi bi-graph-up-arrow me-1"></i>Relatórios</a>
+          <a href="#pagamentos" class="f-link"><i class="bi bi-cash-coin me-1"></i>Pagamentos & Fretes</a>
+          <a href="#chat" class="f-link"><i class="bi bi-chat-dots me-1"></i>Chat</a>
+          <a href="#promocoes" class="f-link"><i class="bi bi-stars me-1"></i>Promoções</a>
+        </div>
+      </div>
+      <hr class="my-3">
+      <div class="text-center text-muted small">© <span id="y"></span> Amanda Closet — Painel do Logista</div>
+    </div>
+  </footer>
+
+  <!-- Libs -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Demo de dados -->
+  <script>
+    // ano rodapé
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // -------- Dados mock --------
+    const hoje = [
+      { id:'#12548', hora:'09:21', cliente:'Bruna S.', itens:2, total:199.00, pg:'PIX', status:'pago' },
+      { id:'#12549', hora:'10:05', cliente:'Marcela K.', itens:1, total:159.90, pg:'Crédito', status:'pago' },
+      { id:'#12555', hora:'11:42', cliente:'Paula D.', itens:3, total:347.40, pg:'Boleto', status:'pendente' },
+      { id:'#12561', hora:'13:08', cliente:'Larissa M.', itens:1, total:89.90,  pg:'PIX', status:'pago' }
+    ];
+    const entregas = [
+      { id:'#12540', cliente:'Joyce T.', cidade:'Campinas/SP', frete:'Expresso', previsao:'22/07', status:'Separando' },
+      { id:'#12541', cliente:'Aline R.', cidade:'Rio de Janeiro/RJ', frete:'Econômico', previsao:'24/07', status:'Postado' },
+      { id:'#12542', cliente:'Nina P.', cidade:'Sorocaba/SP', frete:'Retirada', previsao:'Hoje', status:'Aguardando retirada' }
+    ];
+
+    // -------- KPIs --------
+    const receita = hoje.reduce((s,o)=>s+o.total,0);
+    const pedidos = hoje.length;
+    const itens = hoje.reduce((s,o)=>s+o.itens,0);
+    const ticket = receita / Math.max(1,pedidos);
+
+    const brl = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+
+    document.getElementById('kpiReceita').textContent = brl(receita);
+    document.getElementById('kpiPedidos').textContent = pedidos;
+    document.getElementById('kpiItens').textContent = itens;
+    document.getElementById('kpiTicket').textContent = brl(ticket);
+
+    // -------- Tabelas --------
+    const tbHoje = document.getElementById('tbHoje');
+    hoje.forEach(o=>{
+      tbHoje.insertAdjacentHTML('beforeend', `
+        <tr>
+          <td class="fw-semibold">${o.id}</td>
+          <td>${o.hora}</td>
+          <td>${o.cliente}</td>
+          <td>${o.itens}</td>
+          <td>${brl(o.total)}</td>
+          <td>${o.pg}</td>
+          <td>
+            ${o.status==='pago'
+              ? '<span class="badge bg-success-subtle text-success rounded-pill px-3">Pago</span>'
+              : '<span class="badge bg-warning-subtle text-warning rounded-pill px-3">Pendente</span>'}
+          </td>
+          <td class="text-end">
+            <button class="btn btn-sm btn-outline-dark pill"><i class="bi bi-eye"></i></button>
+          </td>
+        </tr>
+      `)
+    });
+
+    const tbEntregas = document.getElementById('tbEntregas');
+    entregas.forEach(o=>{
+      tbEntregas.insertAdjacentHTML('beforeend', `
+        <tr>
+          <td class="fw-semibold">${o.id}</td>
+          <td>${o.cliente}</td>
+          <td>${o.cidade}</td>
+          <td>${o.frete}</td>
+          <td>${o.previsao}</td>
+          <td>
+            <span class="badge bg-info-subtle text-info rounded-pill px-3">${o.status}</span>
+          </td>
+          <td class="text-end">
+            <button class="btn btn-sm btn-outline-dark pill"><i class="bi bi-clipboard-check"></i></button>
+          </td>
+        </tr>
+      `)
+    });
+
+    // -------- Gráficos --------
+    const ctx1 = document.getElementById('chartVendas');
+    new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+        datasets: [{
+          label: 'Receita (R$)',
+          data: [780, 1420, 980, 1630, 1250, 1890, 1540],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true } },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    const ctx2 = document.getElementById('chartCategorias');
+    new Chart(ctx2, {
+      type: 'doughnut',
+      data: {
+        labels: ['Vestidos','Casacos','Macacões','Acessórios'],
+        datasets: [{
+          data: [42, 25, 20, 13],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } },
+        cutout: '60%'
+      }
+    });
+
+    // Range (exibição)
+    const rangeTxt = document.getElementById('rangeTxt');
+    const dtIni = document.getElementById('dtIni');
+    const dtFim = document.getElementById('dtFim');
+    document.getElementById('btnAplicar').addEventListener('click', ()=>{
+      if(dtIni.value && dtFim.value){
+        rangeTxt.textContent = `${dtIni.value} a ${dtFim.value}`;
+      }
+    });
+  </script>
+</body>
+</html>

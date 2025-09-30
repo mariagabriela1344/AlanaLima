@@ -1,0 +1,48 @@
+:root{
+  --dash-bg: #f7f5f7;
+  --dashbar: #3b2a3c;        /* topo escuro arroxeado */
+  --dashbar-accent: #e9d9df; /* detalhe claro */
+  --ink: #2b2418;
+}
+
+.bg-dash{ background: var(--dash-bg); }
+
+/* Header do logista */
+.dashbar{
+  background: linear-gradient(90deg, #3b2a3c, #4a3550);
+  color: #fff;
+}
+.dashbar .navbar-brand{ color:#fff; text-decoration:none; }
+.brand-badge{
+  display:grid; place-items:center;
+  width:36px; height:36px; border-radius:10px;
+  background:#e9d9df; color:#3b2a3c; font-weight:800;
+}
+.brand-text{ font-weight:600; }
+.brand-text .sub{ font-weight:500; opacity:.8; margin-left:.25rem; }
+
+.dashbar .nav-link{ color:#f2ecf3; }
+.dashbar .nav-link:hover, .dashbar .nav-link:focus{ color:#ffffff; text-decoration:underline; }
+
+/* Footer do logista */
+.dash-footer{
+  background:#2f2130; color:#d8c9d0;
+}
+.dash-footer .f-link{
+  color:#e9d9df; text-decoration:none;
+  padding:.35rem .65rem; border-radius:999px; background:rgba(233,217,223,.08);
+}
+.dash-footer .f-link:hover{ background:rgba(233,217,223,.16); }
+
+/* Cards e elementos */
+.pill{ border-radius:999px; }
+.kpi .kpi-label{ color:#7a6a6f; font-size:.85rem; }
+.kpi .kpi-value{ font-size:1.4rem; font-weight:700; color:#3b2a3c; }
+.kpi .kpi-trend{ font-size:.85rem; }
+
+.table thead th{ white-space:nowrap; }
+
+/* Ajustes de responsividade */
+@media (max-width: 575.98px){
+  .kpi .kpi-value{ font-size:1.2rem; }
+}

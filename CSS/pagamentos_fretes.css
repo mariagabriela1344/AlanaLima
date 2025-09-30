@@ -1,0 +1,56 @@
+:root{
+  --dash-bg: #f7f5f7;
+  --dashbar: #3b2a3c;
+  --ink: #2b2418;
+  --chip: #e9d9df;
+}
+
+.bg-dash{ background: var(--dash-bg); }
+
+/* Header estilo painel do logista */
+.dashbar{
+  background: linear-gradient(90deg, #3b2a3c, #4a3550);
+  color: #fff;
+}
+.dashbar .navbar-brand{ color:#fff; text-decoration:none; }
+.brand-badge{
+  display:grid; place-items:center;
+  width:36px; height:36px; border-radius:10px;
+  background:#e9d9df; color:#3b2a3c; font-weight:800;
+}
+.brand-text{ font-weight:600; }
+.brand-text .sub{ font-weight:500; opacity:.8; margin-left:.25rem; }
+.dashbar .nav-link{ color:#f2ecf3; }
+.dashbar .nav-link.active{ text-decoration: underline; }
+
+/* Footer */
+.dash-footer{ background:#2f2130; color:#d8c9d0; }
+.dash-footer .f-link{
+  color:#e9d9df; text-decoration:none;
+  padding:.35rem .65rem; border-radius:999px; background:rgba(233,217,223,.08);
+}
+
+/* Util */
+.pill{ border-radius:999px; }
+
+/* Tabelas mais compactas em telas pequenas */
+@media (max-width: 575.98px){
+  table td, table th{ white-space: nowrap; }
+}
+/* Footer */
+.footer{
+  background: #f6edf0;
+  color: var(--muted);
+}
+.footer .social{
+  display:inline-flex; width:40px; height:40px; align-items:center; justify-content:center;
+  border-radius: 50%;
+  background: var(--chip);
+  color:#4b3d41; font-size: 1.1rem;
+  text-decoration:none;
+}
+.footer .social:hover{ filter: brightness(.95); }
+/* Header */
+.topbar{
+  background: #f6edf0;
+}

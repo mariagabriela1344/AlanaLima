@@ -1,0 +1,98 @@
+/* Paleta alinhada às telas anteriores */
+:root{
+  --app-bg: #cfadb7;
+  --accent: #b198a6;
+  --card: #ffffff;
+  --ink:  #2b2418;
+  --muted:#7a6a6f;
+  --chip: #e9d9df;
+}
+
+.bg-app{ background: var(--app-bg); }
+
+/* Header */
+.topbar{
+  background: #f6edf0;
+}
+.logo-script{
+  font-family: "Segoe Script","Brush Script MT",cursive;
+  color: #b3868e;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+.logo-sub{
+  letter-spacing: .35em;
+  color: #8a6d74;
+  font-size: .65rem;
+  vertical-align: middle;
+}
+
+.search-input{
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #e6d8dc;
+}
+
+.icon-link{
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+
+/* Banners */
+.hero img{
+  height: clamp(180px, 35vw, 420px);
+  object-fit: cover;
+}
+
+/* Categorias - faixa rolável no mobile */
+.category-strip{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(84px, 1fr);
+  overflow-x: auto;
+  padding: .25rem .25rem .5rem;
+  scroll-snap-type: x proximity;
+}
+.category-strip::-webkit-scrollbar{ height: 8px; }
+.category-strip::-webkit-scrollbar-thumb{ background: #d8c9d0; border-radius: 8px; }
+
+.cat-item{ text-decoration: none; color: inherit; scroll-snap-align: start; }
+.cat-thumb{
+  width: 82px; height: 82px; border-radius: 50%;
+  background-size: cover; background-position: center;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--chip);
+  display: inline-block;
+}
+
+/* Produtos */
+.product-card{
+  border: 1px solid #eadde1;
+  background: var(--card);
+  border-radius: 14px;
+}
+.img-cover{ object-fit: cover; }
+.product-title{
+  font-size: .98rem; line-height: 1.2; margin: 0 0 .25rem;
+}
+.price{ font-weight: 700; color: #4b3d41; }
+
+.product-colors .dot{
+  --c:#000;
+  display:inline-block; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--c); border: 1px solid rgba(0,0,0,.2);
+  margin-right: 6px;
+}
+
+/* Footer */
+.footer{
+  background: #f6edf0;
+  color: var(--muted);
+}
+.footer .social{
+  display:inline-flex; width:40px; height:40px; align-items:center; justify-content:center;
+  border-radius: 50%;
+  background: var(--chip);
+  color:#4b3d41; font-size: 1.1rem;
+  text-decoration:none;
+}
+.footer .social:hover{ filter: brightness(.95); }
