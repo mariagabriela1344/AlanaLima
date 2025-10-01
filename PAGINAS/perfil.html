@@ -1,321 +1,125 @@
 <!doctype html>
-<html lang="pt-br">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Amanda Closet — Meu perfil</title>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-  <!-- Bootstrap 5 + Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
 
-  <!-- Estilos (base do site + específicos desta página) -->
-  <link rel="stylesheet" href="../CSS/perfilcliente.css">
-  
-</head>
-<body class="bg-app">
+  </head>
 
-  <!-- Header (igual ao da Home) -->
-  <header class="navbar navbar-expand-lg topbar shadow-sm">
-    <div class="container-xxl">
-      <a class="navbar-brand fw-semibold" href="home.html">
-        <span class="logo-script">Amanda</span> <span class="logo-sub ms-1">CLOSET</span>
-      </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
-        <span class="navbar-toggler-icon"></span>
+
+  <body>
+    <div class="container-fluid py-4">
+
+    <!-- Cabeçalho -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="text-purple fw-bold">Dados Pessoais</h2>
+      <button class="btn btn-purple">
+        <i class="fa-solid fa-pen me-2"></i>Editar Perfil
       </button>
+    </div>
 
-      <div class="collapse navbar-collapse" id="navMain">
-        <form class="d-flex ms-lg-4 my-3 my-lg-0 flex-grow-1" role="search">
-          <input class="form-control search-input me-2" type="search" placeholder="Buscar produtos..." aria-label="Buscar">
-          <button class="btn btn-outline-dark rounded-pill" type="submit"><i class="bi bi-search"></i></button>
+    <!-- Container Dados Pessoais -->
+    <div class="dados-pessoais card shadow-sm mb-4">
+      <div class="card-body">
+        <form>
+          <div class=" row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Nome:</label>
+              <input type="text" class="form-control input-custom" value="Maria Gabriela" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">CPF:</label>
+              <input type="text" class="form-control input-custom" value="000.000.000-00" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Telefone:</label>
+              <input type="text" class="form-control input-custom" value="(63) 90000-0000" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">E-mail:</label>
+              <input type="email" class="form-control input-custom" value="email@exemplo.com" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">CEP:</label>
+              <input type="text" class="form-control input-custom" value="77824-640" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Cidade:</label>
+              <input type="text" class="form-control input-custom" value="Araguaína" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Estado:</label>
+              <input type="text" class="form-control input-custom" value="TO" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Rua/Logradouro:</label>
+              <input type="text" class="form-control input-custom" value="Rua B, Quadra AA, Lote 03" disabled>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Bairro:</label>
+              <input type="text" class="form-control input-custom" value="Setor Couto" disabled>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Complemento:</label>
+              <input type="text" class="form-control input-custom" value="-" disabled>
+            </div>
+          </div>
         </form>
-
-        <ul class="navbar-nav ms-lg-3 align-items-lg-center gap-lg-2">
-          <li class="nav-item"><a class="nav-link icon-link" href="carrinho.html" title="Carrinho"><i class="bi bi-bag"></i></a></li>
-          <li class="nav-item"><a class="nav-link icon-link" href="#" title="Favoritos"><i class="bi bi-heart"></i></a></li>
-          <li class="nav-item"><a class="nav-link icon-link" href="#" title="Chat"><i class="bi bi-chat-dots"></i></a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link icon-link dropdown-toggle active" href="#" data-bs-toggle="dropdown" title="Perfil">
-              <i class="bi bi-person"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item active" href="perfil.html">Meu perfil</a></li>
-              <li><a class="dropdown-item" href="#">Meus pedidos</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Sair</a></li>
-            </ul>
-          </li>
-        </ul>
       </div>
     </div>
-  </header>
 
-  <main class="container-xxl my-4">
+    <!-- Meus estilos -->
+    <h5 class="text-purple fw-bold ">Meus estilos</h5>
+    <div class="d-flex flex-wrap gap-3 mb-5">
+      <img src="img/estilo1.png" class="style-img" alt="Estilo 1">
+      <img src="img/estilo2.png" class="style-img" alt="Estilo 2">
+    </div>
+
+    <!-- Minhas compras -->
+    <h5 class="fw-bold text-purple">Minhas compras</h5>
     <div class="row g-4">
-      <!-- Card: Dados pessoais -->
-      <div class="col-12 col-lg-8">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
-              <h1 class="h5 m-0">Dados pessoais</h1>
-              <div class="btn-group">
-                <button id="btnEditar" class="btn btn-outline-dark rounded-pill btn-sm"><i class="bi bi-pencil"></i> Editar</button>
-                <button id="btnSalvar" class="btn btn-dark rounded-pill btn-sm d-none"><i class="bi bi-check-lg"></i> Salvar</button>
-                <button id="btnCancelar" class="btn btn-outline-secondary rounded-pill btn-sm d-none">Cancelar</button>
-              </div>
-            </div>
 
-            <form id="formPerfil" class="row g-3">
-              <div class="col-12">
-                <label class="form-label small">Nome completo</label>
-                <input class="form-control pill" name="nome" value="Jhessika Leal" disabled>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label small">CPF</label>
-                <input class="form-control pill" name="cpf" value="000.000.000-00" disabled>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label small">Telefone</label>
-                <input class="form-control pill" name="tel" value="(00) 00000-0000" disabled>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label small">E-mail</label>
-                <input class="form-control pill" type="email" name="email" value="cliente@email.com" disabled>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label small">CEP</label>
-                <input class="form-control pill" name="cep" value="00000-000" disabled>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label small">Cidade</label>
-                <input class="form-control pill" name="cidade" value="São Paulo" disabled>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label small">Estado</label>
-                <input class="form-control pill" name="estado" value="SP" disabled>
-              </div>
-              <div class="col-12">
-                <label class="form-label small">Rua/Logradouro</label>
-                <input class="form-control pill" name="logradouro" value="Rua das Flores, 123" disabled>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label small">Bairro</label>
-                <input class="form-control pill" name="bairro" value="Centro" disabled>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label small">Complemento</label>
-                <input class="form-control pill" name="complemento" value="Ap. 10" disabled>
-              </div>
-            </form>
-
-            <hr class="my-4">
-
-            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
-              <div>
-                <div class="fw-semibold">Segurança</div>
-                <small class="text-muted">Gerencie sua conta</small>
-              </div>
-              <div class="btn-group">
-                <a href="#" class="btn btn-outline-dark rounded-pill btn-sm"><i class="bi bi-key"></i> Alterar senha</a>
-                <button id="btnExcluir" class="btn btn-outline-danger rounded-pill btn-sm"><i class="bi bi-trash"></i> Excluir conta</button>
-              </div>
+      <!-- Compra 1 -->
+      <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+          <div class="d-flex p-3">
+            <img src="img/calca.png" alt="Produto" class="purchase-img me-3">
+            <div>
+              <p class="fw-bold mb-1">Calça Pantalona Preta</p>
+              <p class="mb-1">Cor: <span class="color-box" style="background:#000;"></span></p>
+              <p class="mb-1">Quantidade: 1 &nbsp; | &nbsp; Situação: Pago</p>
+              <p class="mb-1">Forma de pagamento: Pix</p>
+              <p class="mb-0 fw-semibold">Valor total: R$150,00</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Card: Acesso rápido -->
-      <div class="col-12 col-lg-4">
-        <div class="card p-3 shadow-sm quick-links">
-          <div class="d-grid gap-2">
-            <a class="btn btn-outline-dark rounded-pill" href="#compras"><i class="bi bi-receipt"></i> Visualizar compras</a>
-            <a class="btn btn-outline-dark rounded-pill" href="#favoritos"><i class="bi bi-heart"></i> Itens favoritos</a>
-            <a class="btn btn-outline-dark rounded-pill" href="carrinho.html"><i class="bi bi-bag"></i> Ir para o carrinho</a>
-            <a class="btn btn-outline-dark rounded-pill" href="home.html"><i class="bi bi-house"></i> Voltar à Home</a>
+      <!-- Compra 2 -->
+      <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+          <div class="d-flex p-3">
+            <img src="img/conjunto.png" alt="Produto" class="purchase-img me-3">
+            <div>
+              <p class="fw-bold mb-1">Conjunto Bege</p>
+              <p class="mb-1">Cor: <span class="color-box" style="background:#c9c0aa;"></span></p>
+              <p class="mb-1">Quantidade: 1 &nbsp; | &nbsp; Situação: A caminho</p>
+              <p class="mb-1">Forma de pagamento: Pix</p>
+              <p class="mb-0 fw-semibold">Valor total: R$190,00</p>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
 
-    <!-- Abas: Compras / Favoritos -->
-    <section class="mt-5">
-      <ul class="nav nav-pills gap-2" id="perfilTabs" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active rounded-pill" id="tab-compras" data-bs-toggle="pill" data-bs-target="#compras" type="button" role="tab">
-            <i class="bi bi-receipt"></i> Minhas compras
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link rounded-pill" id="tab-favs" data-bs-toggle="pill" data-bs-target="#favoritos" type="button" role="tab">
-            <i class="bi bi-heart"></i> Favoritos
-          </button>
-        </li>
-      </ul>
+  </div>
 
-      <div class="tab-content mt-3">
-        <!-- Compras -->
-        <div class="tab-pane fade show active compact-orders" id="compras" role="tabpanel" aria-labelledby="tab-compras">
-          <div class="row g-3">
-            <!-- Pedido -->
-            <div class="col-12">
-              <div class="card order-card shadow-sm">
-                <div class="card-body d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
-                  <div class="ratio ratio-4x3 order-thumb">
-                    <img class="img-cover rounded" src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop" alt="">
-                  </div>
-                  <div class="flex-grow-1">
-                    <div class="fw-semibold">Macacão alfaiataria</div>
-                    <div class="text-muted small">Cor: marrom | Tamanho: M | Qtd: 1</div>
-                    <div class="fw-semibold mt-1">R$ 199,00</div>
-                  </div>
-                  <div class="text-md-end">
-                    <span class="badge bg-success-subtle text-success rounded-pill px-3 py-2"><i class="bi bi-check-circle"></i> Pago</span>
-                    <div class="small text-muted mt-1">Pedido #12548 • 19/07/2025</div>
-                    <div class="mt-2 d-flex gap-2">
-                      <a class="btn btn-outline-dark btn-sm rounded-pill" href="#"><i class="bi bi-box-arrow-down"></i> Nota fiscal</a>
-                      <a class="btn btn-outline-dark btn-sm rounded-pill" href="#"><i class="bi bi-arrow-repeat"></i> Comprar novamente</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Outro pedido -->
-            <div class="col-12">
-              <div class="card order-card shadow-sm">
-                <div class="card-body d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
-                  <div class="ratio ratio-4x3 order-thumb">
-                    <img class="img-cover rounded" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=800&auto=format&fit=crop" alt="">
-                  </div>
-                  <div class="flex-grow-1">
-                    <div class="fw-semibold">Vestido floral</div>
-                    <div class="text-muted small">Cor: rosa | Tamanho: G | Qtd: 1</div>
-                    <div class="fw-semibold mt-1">R$ 159,90</div>
-                  </div>
-                  <div class="text-md-end">
-                    <span class="badge bg-warning-subtle text-warning rounded-pill px-3 py-2"><i class="bi bi-truck"></i> A caminho</span>
-                    <div class="small text-muted mt-1">Pedido #12602 • 25/07/2025</div>
-                    <div class="mt-2 d-flex gap-2">
-                      <a class="btn btn-outline-dark btn-sm rounded-pill" href="#"><i class="bi bi-geo-alt"></i> Rastrear</a>
-                      <a class="btn btn-outline-dark btn-sm rounded-pill" href="#"><i class="bi bi-arrow-repeat"></i> Comprar novamente</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Favoritos -->
-        <div class="tab-pane fade" id="favoritos" role="tabpanel" aria-labelledby="tab-favs">
-          <div class="row g-3">
-            <div class="col-6 col-md-4 col-lg-3">
-              <div class="card product-card h-100">
-                <div class="ratio ratio-4x3">
-                  <img class="img-cover rounded-top" src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=80&w=800&auto=format&fit=crop" alt="">
-                </div>
-                <div class="card-body">
-                  <h3 class="product-title">Casaco cozy</h3>
-                  <div class="d-flex align-items-center justify-content-between">
-                    <span class="price">R$ 259,00</span>
-                    <button class="btn btn-sm btn-outline-dark rounded-pill"><i class="bi bi-bag-plus"></i></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-6 col-md-4 col-lg-3">
-              <div class="card product-card h-100">
-                <div class="ratio ratio-4x3">
-                  <img class="img-cover rounded-top" src="https://images.unsplash.com/photo-1520975960082-6f2a4a2d5b05?q=80&w=800&auto=format&fit=crop" alt="">
-                </div>
-                <div class="card-body">
-                  <h3 class="product-title">Short alfaiataria</h3>
-                  <div class="d-flex align-items-center justify-content-between">
-                    <span class="price">R$ 89,90</span>
-                    <button class="btn btn-sm btn-outline-dark rounded-pill"><i class="bi bi-bag-plus"></i></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Adicione mais cards conforme necessário -->
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Rodapé (igual ao da Home) -->
-  <footer class="footer mt-5">
-    <div class="container-xxl py-4">
-      <div class="row align-items-center gy-3">
-        <div class="col-12 col-lg-6 text-center text-lg-start">
-          <div class="fw-semibold">Siga a Amanda Closet</div>
-          <div class="text-muted small">Novidades, promoções e muito mais.</div>
-        </div>
-        <div class="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-end gap-3">
-          <a class="social" href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-          <a class="social" href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-          <a class="social" href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-          <a class="social" href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-        </div>
-      </div>
-      <hr class="my-3">
-      <div class="text-center text-muted small">© <span id="y"></span> Amanda Closet — Todos os direitos reservados.</div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // ano no rodapé
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // ---- Editar / Salvar / Cancelar ----
-    const form = document.getElementById('formPerfil');
-    const btnEditar = document.getElementById('btnEditar');
-    const btnSalvar = document.getElementById('btnSalvar');
-    const btnCancelar = document.getElementById('btnCancelar');
-
-    let backup = {};
-
-    function setEditable(on){
-      form.querySelectorAll('input').forEach(i=> i.disabled = !on);
-      btnEditar.classList.toggle('d-none', on);
-      btnSalvar.classList.toggle('d-none', !on);
-      btnCancelar.classList.toggle('d-none', !on);
-    }
-
-    btnEditar.addEventListener('click', ()=>{
-      // guarda valores atuais
-      backup = {};
-      form.querySelectorAll('input').forEach(i=> backup[i.name] = i.value);
-      setEditable(true);
-    });
-
-    btnCancelar.addEventListener('click', ()=>{
-      // restaura
-      form.querySelectorAll('input').forEach(i=> i.value = backup[i.name] ?? i.value);
-      setEditable(false);
-    });
-
-    btnSalvar.addEventListener('click', ()=>{
-      setEditable(false);
-      // aqui você faria o POST/PUT para sua API
-      alert('Dados salvos com sucesso!');
-    });
-
-    // ---- Excluir conta (confirmação simples) ----
-    document.getElementById('btnExcluir').addEventListener('click', ()=>{
-      if(confirm('Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.')){
-        // chamada à API de exclusão
-        alert('Conta excluída! (simulação)');
-        // window.location.href = 'home.html';
-      }
-    });
-  </script>
-</body>
+   
+  </body>
 </html>

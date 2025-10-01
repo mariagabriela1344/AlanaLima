@@ -1,241 +1,141 @@
 <!doctype html>
-<html lang="pt-br">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Amanda Closet — Carrinho</title>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-  <!-- Bootstrap 5 + Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
 
-  <!-- Estilos (mesma base do home + específicos do carrinho) -->
-  <link rel="stylesheet" href="../CSS/carrinho.css">
+  </head>
+
+
+
+  <body>
+     <header class="header fixed-top">
+        <div class="logo">
+
+            <img src="../IMG/logo-alana-lima.png" alt="Logo Alana lima">
+        </div>
+
+
+        <div class="search-box">
+            <input type="text" placeholder="buscar...">
+        </div>
+
+        <div class="icons">
+
+            <img src="../IMG/chat.png" alt="chat">
+            <img src="../IMG/carrinho.png" alt="carrinho">
+            <img src="../IMG/perfil.png" alt="perfil">
+
+        </div>
+    </header>
+    
+
+  <!-- Conteúdo do Carrinho -->
+  <div class="container my-4">
+    <div class="cart-box p-4">
+      <!-- Produto 1 -->
+      <div class="row mb-4">
+        <div class="col-md-3">
+          <img src="../IMG/saia rosa.jpg" alt="Saia Croche" class="img-fluid rounded">
+        </div>
+        <div class="col-md-9">
+          <h6>Saia de Croche feminina Longa</h6>
+          <p>R$:56,47</p>
+          <p>Cor:
+            <span class="color-option bg-primary"></span>
+            <span class="color-option bg-pink"></span>
+            <span class="color-option bg-purple"></span>
+          </p>
+          <p>Tamanhos: P, M(M), G, GG</p>
+          <div class="d-flex align-items-center">
+            <span class="me-2">Quantidade</span>
+            <button class="btn btn-light btn-sm">-</button>
+            <input type="text" class="qty-input" value="1" readonly>
+            <button class="btn btn-light btn-sm">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produto 2 -->
+      <div class="row mb-4">
+        <div class="col-md-3">
+          <img src="../IMG/vestido rosa.jpg" alt="Vestido Rosa" class="img-fluid rounded">
+        </div>
+        <div class="col-md-9">
+          <h6>Vestido Rosa claro Longo com babado de Renda branco</h6>
+          <p>R$:190,00</p>
+          <p>Cor:</p>
+          <p>Tamanhos: P, M, G</p>
+          <div class="d-flex align-items-center">
+            <span class="me-2">Quantidade</span>
+            <button class="btn btn-light btn-sm">-</button>
+            <input type="text" class="qty-input" value="1" readonly>
+            <button class="btn btn-light btn-sm">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botão Finalizar -->
+      <div class="text-center">
+        <button class="btn btn-dark px-5">FINALIZAR</button>
+      </div>
+    </div>
+
+    <!-- Produtos sugeridos -->
+    <div class="row mt-4">
+      <div class="col-md-6 text-center">
+        <div class="suggestion-box">
+          <img src="../IMG/blusa bege.jpg" alt="Blusa bege" class="img-fluid">
+          <p>Blusa bege <br> Valor: 49,47</p>
+        </div>
+      </div>
+      <div class="col-md-6 text-center">
+        <div class="suggestion-circle">
+          <img src="../IMG/blusa listrada.jpg" alt="Camisa listrada" class="img-fluid rounded-circle">
+          <p>Camiseta Listrada <br> Valor: 47,34</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão adicionar -->
+    <div class="text-center mt-3">
+      <button class="btn btn-dark px-4">ADICIONAR AO CARRINHO <br> <small>30% DE DESCONTO</small></button>
+    </div>
+  </div>
+
+ 
   
-</head>
-<body class="bg-app">
 
-  <!-- Header (igual ao da Home) -->
-  <header class="navbar navbar-expand-lg topbar shadow-sm">
-    <div class="container-xxl">
-      <a class="navbar-brand fw-semibold" href="home.html">
-        <span class="logo-script">Amanda</span> <span class="logo-sub ms-1">CLOSET</span>
-      </a>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <!--Rodapé-->
+    <footer class="footer fixed-bottom">
+        <div class="footer-esquerdo">
+            <p> Dsenevolvido por Maria Gabriela Reis
+        </div>
 
-      <div class="collapse navbar-collapse" id="navMain">
-        <form class="d-flex ms-lg-4 my-3 my-lg-0 flex-grow-1" role="search">
-          <input class="form-control search-input me-2" type="search" placeholder="Buscar produtos..." aria-label="Buscar">
-          <button class="btn btn-outline-dark rounded-pill" type="submit"><i class="bi bi-search"></i></button>
-        </form>
-
-        <ul class="navbar-nav ms-lg-3 align-items-lg-center gap-lg-2">
-          <li class="nav-item"><a class="nav-link icon-link" href="carrinho.html" title="Carrinho"><i class="bi bi-bag"></i></a></li>
-          <li class="nav-item"><a class="nav-link icon-link" href="#" title="Favoritos"><i class="bi bi-heart"></i></a></li>
-          <li class="nav-item"><a class="nav-link icon-link" href="#" title="Chat"><i class="bi bi-chat-dots"></i></a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link icon-link dropdown-toggle" href="#" data-bs-toggle="dropdown" title="Perfil">
-              <i class="bi bi-person"></i>
+        <!--Area Direita com as redes sociais-->
+        <div class=footer-direito>
+            <p> Conheça nossas redes sociais</p>
+            <a href="">
+                <img src="" alt="instagram">
             </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#">Minha conta</a></li>
-              <li><a class="dropdown-item" href="#">Meus pedidos</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Sair</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
 
-  <main class="container-xxl my-4">
-    <h1 class="h4 mb-3">Meu carrinho</h1>
-
-    <div class="row g-4">
-      <!-- Lista de itens -->
-      <div class="col-12 col-lg-8">
-        <div class="cart-list card shadow-sm">
-          <!-- ITEM -->
-          <div class="cart-item d-flex flex-column flex-sm-row" data-price="159.90">
-            <div class="thumb-wrap">
-              <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=800&auto=format&fit=crop" alt="Vestido floral">
-            </div>
-            <div class="item-info flex-grow-1">
-              <h3 class="title">Vestido floral</h3>
-              <div class="muted small">Cor:
-                <span class="dot" style="--c:#d07b7b"></span>
-                <span class="dot" style="--c:#000"></span>
-              </div>
-              <div class="muted small">Tamanhos: P, M, G</div>
-              <div class="price">R$ <span class="unit">159,90</span></div>
-            </div>
-            <div class="qty-area">
-              <div class="qty-label">Qtd.</div>
-              <div class="qty-controls">
-                <button class="btn-qty minus" aria-label="Diminuir"><i class="bi bi-dash-lg"></i></button>
-                <input class="qty" type="text" inputmode="numeric" value="1" aria-label="Quantidade">
-                <button class="btn-qty plus" aria-label="Aumentar"><i class="bi bi-plus-lg"></i></button>
-              </div>
-              <button class="btn btn-link text-danger p-0 mt-2 remove"><i class="bi bi-trash"></i> remover</button>
-            </div>
-          </div>
-
-          <!-- ITEM -->
-          <div class="cart-item d-flex flex-column flex-sm-row" data-price="199.00">
-            <div class="thumb-wrap">
-              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop" alt="Macacão alfaiataria">
-            </div>
-            <div class="item-info flex-grow-1">
-              <h3 class="title">Macacão alfaiataria</h3>
-              <div class="muted small">Cor:
-                <span class="dot" style="--c:#2f2f2f"></span>
-                <span class="dot" style="--c:#8c5c4a"></span>
-              </div>
-              <div class="muted small">Tamanhos: M, G</div>
-              <div class="price">R$ <span class="unit">199,00</span></div>
-            </div>
-            <div class="qty-area">
-              <div class="qty-label">Qtd.</div>
-              <div class="qty-controls">
-                <button class="btn-qty minus" aria-label="Diminuir"><i class="bi bi-dash-lg"></i></button>
-                <input class="qty" type="text" inputmode="numeric" value="1" aria-label="Quantidade">
-                <button class="btn-qty plus" aria-label="Aumentar"><i class="bi bi-plus-lg"></i></button>
-              </div>
-              <button class="btn btn-link text-danger p-0 mt-2 remove"><i class="bi bi-trash"></i> remover</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Resumo -->
-      <div class="col-12 col-lg-4">
-        <div class="card p-3 shadow-sm sticky-lg-top summary" style="top: 88px;">
-          <h2 class="h6">Resumo</h2>
-          <div class="d-flex justify-content-between small text-muted">
-            <span>Subtotal</span> <span id="subtotal">R$ 0,00</span>
-          </div>
-          <div class="d-flex justify-content-between small text-muted">
-            <span>Frete</span> <span>R$ 0,00</span>
-          </div>
-          <hr>
-          <div class="d-flex justify-content-between fw-semibold">
-            <span>Total</span> <span id="total">R$ 0,00</span>
-          </div>
-          <button class="btn btn-dark rounded-pill w-100 mt-3">Finalizar compra</button>
-          <a href="home.html" class="btn btn-outline-dark rounded-pill w-100 mt-2"><i class="bi bi-arrow-left"></i> Continuar comprando</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Favoritos -->
-    <section class="mt-5">
-      <div class="d-flex align-items-center justify-content-between mb-2">
-        <h2 class="h5 m-0">Seus favoritos</h2>
-        <a class="link-more" href="#">ver todos</a>
-      </div>
-
-      <div class="row g-3">
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="card product-card h-100">
-            <div class="ratio ratio-4x3">
-              <img src="https://images.unsplash.com/photo-1520975960082-6f2a4a2d5b05?q=80&w=800&auto=format&fit=crop" class="img-cover rounded-top" alt="">
-            </div>
-            <div class="card-body">
-              <h3 class="product-title">Short alfaiataria</h3>
-              <div class="d-flex align-items-center justify-content-between">
-                <span class="price">R$ 89,90</span>
-                <button class="btn btn-sm btn-outline-dark rounded-pill"><i class="bi bi-bag-plus"></i></button>
-              </div>
-            </div>
-          </div>
+            <a href="">
+                <img src="" alt="tiktok">
+            </a>
+            <a href="">
+                <img src="" alt="facebook">
+            </a>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="card product-card h-100">
-            <div class="ratio ratio-4x3">
-              <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=80&w=800&auto=format&fit=crop" class="img-cover rounded-top" alt="">
-            </div>
-            <div class="card-body">
-              <h3 class="product-title">Casaco cozy</h3>
-              <div class="d-flex align-items-center justify-content-between">
-                <span class="price">R$ 259,00</span>
-                <button class="btn btn-sm btn-outline-dark rounded-pill"><i class="bi bi-bag-plus"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
+    </footer>
 
-        <!-- adicione mais cards conforme necessário -->
-      </div>
-    </section>
-  </main>
-
-  <!-- Rodapé (igual ao da Home) -->
-  <footer class="footer mt-5">
-    <div class="container-xxl py-4">
-      <div class="row align-items-center gy-3">
-        <div class="col-12 col-lg-6 text-center text-lg-start">
-          <div class="fw-semibold">Siga a Amanda Closet</div>
-          <div class="text-muted small">Novidades, promoções e muito mais.</div>
-        </div>
-        <div class="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-end gap-3">
-          <a class="social" href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-          <a class="social" href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-          <a class="social" href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-          <a class="social" href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-        </div>
-      </div>
-      <hr class="my-3">
-      <div class="text-center text-muted small">© <span id="y"></span> Amanda Closet — Todos os direitos reservados.</div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // ano no rodapé
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // --------- Lógica do carrinho (frontend) ----------
-    const money = v => v.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
-
-    function recalc(){
-      let subtotal = 0;
-      document.querySelectorAll('.cart-item').forEach(item=>{
-        const price = parseFloat(item.dataset.price);
-        const q = parseInt(item.querySelector('.qty').value || 0, 10);
-        subtotal += price * q;
-      });
-      document.getElementById('subtotal').textContent = money(subtotal);
-      document.getElementById('total').textContent = money(subtotal); // frete 0
-    }
-
-    // controles de quantidade
-    document.querySelectorAll('.cart-item').forEach(item=>{
-      const input = item.querySelector('.qty');
-      item.querySelector('.plus').addEventListener('click', ()=>{
-        input.value = Math.max(1, parseInt(input.value||1,10)+1);
-        recalc();
-      });
-      item.querySelector('.minus').addEventListener('click', ()=>{
-        input.value = Math.max(1, parseInt(input.value||1,10)-1);
-        recalc();
-      });
-      input.addEventListener('input', ()=>{
-        input.value = input.value.replace(/\D/g,'');
-        if(!input.value) input.value = 1;
-        recalc();
-      });
-      item.querySelector('.remove')?.addEventListener('click', ()=>{
-        item.remove();
-        recalc();
-      });
-    });
-
-    recalc();
-  </script>
-</body>
+   
+  </body>
 </html>

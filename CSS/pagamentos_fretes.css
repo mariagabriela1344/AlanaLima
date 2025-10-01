@@ -9,14 +9,14 @@
 
 /* Header estilo painel do logista */
 .dashbar{
-  background: linear-gradient(90deg, #3b2a3c, #4a3550);
+  background: linear-gradient(90deg, #a16893, #a8649d);
   color: #fff;
 }
 .dashbar .navbar-brand{ color:#fff; text-decoration:none; }
 .brand-badge{
   display:grid; place-items:center;
   width:36px; height:36px; border-radius:10px;
-  background:#e9d9df; color:#3b2a3c; font-weight:800;
+  background:#e9d9df; color:#d186ba; font-weight:800;
 }
 .brand-text{ font-weight:600; }
 .brand-text .sub{ font-weight:500; opacity:.8; margin-left:.25rem; }
@@ -24,7 +24,8 @@
 .dashbar .nav-link.active{ text-decoration: underline; }
 
 /* Footer */
-.dash-footer{ background:#2f2130; color:#d8c9d0; }
+/* Tabelas mais compactas em telas pequenas */
+.dash-footer{ background:#a170a5cb; color:#d8c9d0; }
 .dash-footer .f-link{
   color:#e9d9df; text-decoration:none;
   padding:.35rem .65rem; border-radius:999px; background:rgba(233,217,223,.08);

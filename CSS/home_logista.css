@@ -1,48 +1,72 @@
-:root{
-  --dash-bg: #f7f5f7;
-  --dashbar: #3b2a3c;        /* topo escuro arroxeado */
-  --dashbar-accent: #e9d9df; /* detalhe claro */
-  --ink: #2b2418;
+body {
+  background: #f7f8fb;
 }
 
-.bg-dash{ background: var(--dash-bg); }
-
-/* Header do logista */
-.dashbar{
-  background: linear-gradient(90deg, #3b2a3c, #4a3550);
-  color: #fff;
+.navbar {
+  background: #1f7a8c;
 }
-.dashbar .navbar-brand{ color:#fff; text-decoration:none; }
-.brand-badge{
-  display:grid; place-items:center;
-  width:36px; height:36px; border-radius:10px;
-  background:#e9d9df; color:#3b2a3c; font-weight:800;
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: #fff !important;
 }
-.brand-text{ font-weight:600; }
-.brand-text .sub{ font-weight:500; opacity:.8; margin-left:.25rem; }
-
-.dashbar .nav-link{ color:#f2ecf3; }
-.dashbar .nav-link:hover, .dashbar .nav-link:focus{ color:#ffffff; text-decoration:underline; }
-
-/* Footer do logista */
-.dash-footer{
-  background:#2f2130; color:#d8c9d0;
+.navbar .nav-link.active {
+  font-weight: 600;
+  text-decoration: underline;
 }
-.dash-footer .f-link{
-  color:#e9d9df; text-decoration:none;
-  padding:.35rem .65rem; border-radius:999px; background:rgba(233,217,223,.08);
+
+/* KPIs */
+.kpi-card {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(31,122,140,0.08);
 }
-.dash-footer .f-link:hover{ background:rgba(233,217,223,.16); }
+.kpi-value {
+  font-size: clamp(1.2rem, 2.6vw, 1.75rem);
+  font-weight: 800;
+}
+.kpi-label {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+.kpi-trend {
+  font-size: 0.85rem;
+}
 
-/* Cards e elementos */
-.pill{ border-radius:999px; }
-.kpi .kpi-label{ color:#7a6a6f; font-size:.85rem; }
-.kpi .kpi-value{ font-size:1.4rem; font-weight:700; color:#3b2a3c; }
-.kpi .kpi-trend{ font-size:.85rem; }
+/* Seções */
+.section-title {
+  font-weight: 700;
+}
 
-.table thead th{ white-space:nowrap; }
+/* Tabelas */
+.table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+}
+.table-responsive {
+  max-height: 400px;
+}
+.footer {
+    background-color: #cba3c9;
+    /*cor de fundo*/
+    padding: 15px 40px 15px 40px;
+    /*dimensão*/
+    color: white;
+    /*cor do texto*/
+    font-family: Arial, Helvetica, sans-serif;
+    /*fonte dos textos*/
 
-/* Ajustes de responsividade */
-@media (max-width: 575.98px){
-  .kpi .kpi-value{ font-size:1.2rem; }
+}
+
+/* Links do menu ao passar o mouse */
+.navbar .nav-link:hover { opacity: 0.9; }
+.navbar{
+    background-color: #8b447d;
+}
+
+/* Ajustes responsivos leves */
+@media (max-width: 576px) {
+  .brand-thumb { width: 100%; height: 160px; }
+  .product-thumb { height: 160px; }
 }
