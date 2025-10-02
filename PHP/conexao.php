@@ -2,7 +2,7 @@
 // conexao.php
 
 $host = "localhost";   // servidor do banco
-$db   = "petAmigo";   // nome do banco de dados
+$db   = "lojaalanalima";   // nome do banco de dados
 $user = "root";        // usuário do MySQL
 $pass = "";            // senha do MySQL (ajuste se houver)
 
