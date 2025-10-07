@@ -47,16 +47,16 @@ try{
      ]);
      /* Verificando se foi cadastrado no banco de dados */
      if($inserir){
-        redirecWith("../paginaslogista/cadastro_produtos_logista.html",
+        redirecWith("../paginas_logista/cadastro_produtos_logista.html",
         ["cadastro" => "ok"]) ;
      }else{
-        redirecWith("../paginaslogista/cadastro_produtos_logista.html",["erro" 
+        redirecWith("../paginas_logista/cadastro_produtos_logista.html",["erro" 
         =>"Erro ao cadastrar no banco de dados"]);
      }
 
 
 }catch(Exception $e){
- redirecWith("../paginaslogista/cadastro_produtos_logista.html",
+ redirecWith("../paginas_logista/cadastro_produtos_logista.html",
       ["erro" => "Erro no banco de dados: "
       .$e->getMessage()]);
 }

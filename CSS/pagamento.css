@@ -1,0 +1,31 @@
+body {
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+h3 {
+    color: #333;
+}
+
+.btn-primary {
+    background-color: #af4c9e;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #8e45a0;
+}
+
+.list-group-item {
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: 20px;
+    }
+}
