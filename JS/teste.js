@@ -122,3 +122,5 @@ som:"true",
 arcondicionado: false
  };
  console.log(carro.cor+carro.modelo+carro.placa);
+
+ 
