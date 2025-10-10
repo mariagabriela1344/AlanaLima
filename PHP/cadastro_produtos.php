@@ -18,10 +18,17 @@ exit;
 }
 
 /* LÊ arquivo de upload como blod (ou null)*/
-function readImageToBlod(?array $file): ?string{
-    if(!$file || !isset($file["tmp_name"])) || $file['error'] !== UPLOAD_ERR_OK ) return null;
+function readImageToBlob(?array $file): ?string {
+    if (
+        !$file ||
+        !isset($file['tmp_name']) ||
+        $file['error'] !== UPLOAD_ERR_OK
+    ) {
+        return null;
+    }
+
     $content = file_get_contents($file['tmp_name']);
-    return $content === false? null : $content;
+    return $content === false ? null : $content;
 }
 
 try{

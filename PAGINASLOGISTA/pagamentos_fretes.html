@@ -78,7 +78,25 @@
                 <th style="width:80px">#ID</th>
                 <th>Nome</th>
                 <th class="text-end" style="width:160px">Ações</th>
-              </tr>
+                    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0 produtos-tabela">
+        <thead class="table-light">
+        
+          <!-- EXEMPLOS EÁTICOS (substitua pelos seus dados quando integrar) -->
+          <select id="pFrete" class="form-select">
+            <option selected>Dinheiro</option>
+            <option>Pix</option>
+            <option>Boleto</option>
+            <option>Cartão</option>
+          </select>
+
+
+          
+        </tbody>
+        
+      </table>
+    </div>
+              </td>
             </thead>
             <tbody id="tbPg"></tbody>
           </table>
@@ -92,6 +110,7 @@
         <div class="d-flex align-items-center justify-content-between">
           <span class="fw-semibold">Fretes</span>
           <small class="text-muted">Defina valores por bairro e transportadora (opcional)</small>
+
         </div>
       </div>
       <div class="card-body">
@@ -99,11 +118,11 @@
         <form id="formFr" action="../PHP/cadastro_frete.php" method="post" class="row g-2 align-items-end">
           <input type="hidden" id="frId">
           <div class="col-12 col-lg-4">
-            <label class="form-label small">Bairro</label>
+           
             <input id="frBairro" name="bairro" class="form-control" placeholder="Ex.: Centro" required>
           </div>
           <div class="col-6 col-lg-2">
-            <label class="form-label small">Valor</label>
+           
             <input id="frValor" name="valor" class="form-control" placeholder="0,00" inputmode="decimal" required>
           </div>
           <div class="col-6 col-lg-3">
@@ -115,17 +134,61 @@
             <button id="btnFrCancelar" class="btn btn-outline-secondary pill ms-1 d-none" type="button">Cancelar</button>
           </div>
         </form>
+ <hr class="my-4"/>
+          <h6 class="mb-3">Fretes cadastrados</h6>
+          <div class="table-responsive">
+            <table class="table align-middle table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th style="width:90px">#ID</th>
+                  <th>Bairro</th>
+                  <th>Transportadora</th>
+            <th class="text-end">Valor</th>     
+                  <th class="text-end" style="width:160px">Ações</th>
+                </tr>
+              </thead>
+
+
+
+
+
 
         <div class="table-responsive mt-3">
           <table class="table align-middle table-hover m-0">
             <thead class="table-light">
               <tr>
-                <th style="width:80px">#ID</th>
-                <th>Bairro</th>
-                <th>Transportadora</th>
-                <th style="width:120px">Valor</th>
-                <th class="text-end" style="width:180px">Ações</th>
               </tr>
+<tr>           <td>1</td>
+                  <td>Centro</td>
+                  <td>RápidoExpress</td>
+                  <td class="text-end">R$ 12,50</td>
+                  <td class="text-end">
+                    <button class="btn btn-sm btn-outline-secondary">Editar</button>
+                    <button class="btn btn-sm btn-outline-danger">Excluir</button>
+                  </td>
+</tr>
+                  
+                  <td>2</td>
+                  <td>Jardim das Flores</td>
+                  <td>—</td>
+                  <td class="text-end">R$ 18,00</td>
+                  <td class="text-end">
+                    <button class="btn btn-sm btn-outline-secondary">Editar</button>
+                    <button class="btn btn-sm btn-outline-danger">Excluir</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Vila Nova</td>
+                  <td>EntregaFácil</td>
+                  <td class="text-end">R$ 15,90</td>
+                  <td class="text-end">
+                    <button class="btn btn-sm btn-outline-secondary">Editar</button>
+                    <button class="btn btn-sm btn-outline-danger">Excluir</button>
+                  </td>
+
+
+
             </thead>
             <tbody id="tbFr"></tbody>
           </table>
