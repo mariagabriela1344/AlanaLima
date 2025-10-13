@@ -78,7 +78,7 @@ try{
 // SE O METODO DE ENVIO FOR DIFERENTE DO POST
     if($_SERVER["REQUEST_METHOD"] !== "POST"){
         //VOLTAR À TELA DE CADASTRO E EXIBIR ERRO
-        redirecWith("../paginas_logista/cadastro_produtos_logista.html",
+        redirecWith("../paginaslogista/cadastro_produtos_logista.html",
            ["erro"=> "Metodo inválido"]);
     }
     // jogando os dados da dentro de váriaveis
@@ -103,16 +103,16 @@ try{
      ]);
      /* Verificando se foi cadastrado no banco de dados */
      if($inserir){
-        redirecWith("../paginas_logista/cadastro_produtos_logista.html",
+        redirecWith("../paginaslogista/cadastro_produtos_logista.html",
         ["cadastro" => "ok"]) ;
      }else{
-        redirecWith("../paginas_logista/cadastro_produtos_logista.html",["erro" 
+        redirecWith("../paginaslogista/cadastro_produtos_logista.html",["erro" 
         =>"Erro ao cadastrar no banco de dados"]);
      }
 
 
 }catch(Exception $e){
- redirecWith("../paginas_logista/cadastro_produtos_logista.html",
+ redirecWith("../paginaslogista/cadastro_produtos_logista.html",
       ["erro" => "Erro no banco de dados: "
       .$e->getMessage()]);
 }
