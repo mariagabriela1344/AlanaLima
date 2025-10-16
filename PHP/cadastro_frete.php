@@ -1,67 +1,112 @@
 <?php
+// =======================================================
+// CONEXÃO COM O BANCO DE DADOS
+// =======================================================
+require_once __DIR__ . "/conexao.php";
 
-// Conectando este arquivo ao banco de dados
-require_once __DIR__ ."/conexao.php";
-
-// função para capturar os dados passados de uma página a outra
-function redirecWith($url,$params=[]){
-// verifica se os os paramentros não vieram vazios
- if(!empty($params)){
-// separar os parametros em espaços diferentes
-$qs= http_build_query($params);
-$sep = (strpos($url,'?') === false) ? '?': '&';
-$url .= $sep . $qs;
-}
-// joga a url para o cabeçalho no navegador
-header("Location:  $url");
-// fecha o script
-exit;
-}
-
-try{
-    // SE O METODO DE ENVIO FOR DIFERENTE DO POST
-    if($_SERVER["REQUEST_METHOD"] !== "POST"){
-        //VOLTAR À TELA DE CADASTRO E EXIBIR ERRO
-        redirecWith("../paginaslogista/pagamentos_fretes.html",
-           ["erro"=> "Metodo inválido"]);
+// =======================================================
+// FUNÇÃO DE REDIRECIONAMENTO
+// =======================================================
+function redirecWith($url, $params = []) {
+    if (!empty($params)) {
+        $qs = http_build_query($params);
+        $sep = (strpos($url, '?') === false) ? '?' : '&';
+        $url .= $sep . $qs;
     }
-    // variaveis
-    $bairro = $_POST["bairro"];
-    $valor = (double)$_POST["valor"];
-    $transportadora = $_POST["transportadora"];
+    header("Location: $url");
+    exit;
+}
 
-    // validação
-    $erros_validacao=[];
-    //se qualquer campo for vazio
-    if($bairro === "" || $valor ==="" ){
-        $erros_validacao[]="Preencha todos os campos";
+// =======================================================
+// LISTAR FRETES (GET)
+// =======================================================
+if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["listar"])) {
+    try {
+        $sql = "SELECT idFretes AS id, bairro, valor, transportadora
+                FROM Fretes
+                ORDER BY bairro, valor";
+        $stmt = $pdo->query($sql);
+        $fretes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $formato = isset($_GET["format"]) ? strtolower($_GET["format"]) : "option";
+
+        if ($formato === "json") {
+            $saida = array_map(fn($f) => [
+                "id" => (int)$f["id"],
+                "bairro" => $f["bairro"],
+                "valor" => (float)$f["valor"],
+                "transportadora" => $f["transportadora"],
+            ], $fretes);
+
+            header("Content-Type: application/json; charset=utf-8");
+            echo json_encode(["ok" => true, "fretes" => $saida], JSON_UNESCAPED_UNICODE);
+            exit;
+        }
+
+        // Retorno HTML <option>
+        header("Content-Type: text/html; charset=utf-8");
+        foreach ($fretes as $f) {
+            $id = (int)$f["id"];
+            $bairro = htmlspecialchars($f["bairro"], ENT_QUOTES, "UTF-8");
+            $transp = $f["transportadora"] ? " (" . htmlspecialchars($f["transportadora"], ENT_QUOTES, "UTF-8") . ")" : "";
+            $valorFmt = number_format((float)$f["valor"], 2, ",", ".");
+            echo "<option value=\"{$id}\">{$bairro}{$transp} - R$ {$valorFmt}</option>\n";
+        }
+        exit;
+
+    } catch (Throwable $e) {
+        if (($formato ?? '') === "json") {
+            header("Content-Type: application/json; charset=utf-8", true, 500);
+            echo json_encode([
+                "ok" => false,
+                "error" => "Erro ao listar fretes",
+                "detail" => $e->getMessage()
+            ], JSON_UNESCAPED_UNICODE);
+        } else {
+            header("Content-Type: text/html; charset=utf-8", true, 500);
+            echo "<option disabled>Erro ao carregar fretes</option>";
+        }
+        exit;
+    }
+}
+
+// =======================================================
+// CADASTRAR FRETE (POST)
+// =======================================================
+try {
+    if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+        redirecWith("../paginaslogista/pagamentos_fretes.html", ["erro" => "Método inválido"]);
     }
 
-/* Inserir o frete no banco de dados */
-    $sql ="INSERT INTO 
-    Fretes (bairro,valor,transportadora)
-     Values (:bairro,:valor,:transportadora)";
-     // executando o comando no banco de dados
-     $inserir = $pdo->prepare($sql)->execute([
+    // Recebe dados do formulário
+    $bairro = trim($_POST["bairro"] ?? "");
+    $valor = (float)($_POST["valor"] ?? 0);
+    $transportadora = trim($_POST["transportadora"] ?? "");
+
+    // Validação básica
+    if ($bairro === "" || $valor <= 0) {
+        redirecWith("../paginaslogista/pagamentos_fretes.html", ["erro" => "Preencha todos os campos corretamente"]);
+    }
+
+    // Inserção no banco
+    $sql = "INSERT INTO Fretes (bairro, valor, transportadora)
+            VALUES (:bairro, :valor, :transportadora)";
+    $stmt = $pdo->prepare($sql);
+    $ok = $stmt->execute([
         ":bairro" => $bairro,
-        ":valor"=> $valor,
-        ":transportadora"=> $transportadora,     
-     ]);
+        ":valor" => $valor,
+        ":transportadora" => $transportadora
+    ]);
 
-     /* Verificando se foi cadastrado no banco de dados */
-     if($inserir){
-        redirecWith("../paginaslogista/pagamentos_fretes.html",
-        ["cadastro" => "ok"]) ;
-     }else{
-        redirecWith("../paginaslogista/pagamentos_fretes.html"
-        ,["erro" =>"Erro ao cadastrar no banco
-         de dados"]);
-     }
-}catch(\Exception $e){
-redirecWith("../paginaslogista/pagamentos_fretes.html",
-      ["erro" => "Erro no banco de dados: "
-      .$e->getMessage()]);
+    if ($ok) {
+        redirecWith("../paginaslogista/pagamentos_fretes.html", ["cadastro" => "ok"]);
+    } else{
+        redirecWith("../paginaslogista/pagamentos_fretes.html", ["erro" => "Erro ao cadastrar no banco de dados"]);
+    }
+
+} catch (Exception $e) {
+    redirecWith("../paginaslogista/pagamentos_fretes.html", [
+        "erro" => "Erro no banco de dados: " . $e->getMessage()
+    ]);
 }
-
-
 ?>
