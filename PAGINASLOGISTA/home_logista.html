@@ -14,37 +14,26 @@
 </head>
 <body class="bg-dash">
 
-  <!-- Header (exclusivo do logista) -->
-  <header class="navbar navbar-expand-lg dashbar">
-    <div class="container-xxl">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-        <div class="brand-badge">AL</div>
-        <div class="brand-text">AlanaLima <span class="sub">Logista</span></div>
-      </a>
-
-      <button class="navbar-toggler border-0 shadow-none text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navDash">
-        <i class="bi bi-list fs-2"></i>
+  <!-- 1) Menu de navegação -->
+  <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">AlanaLima</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Alternar navegação">
+        <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navDash">
-        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-          <li class="nav-item"><a class="nav-link" href="#relatorios"><i class="bi bi-graph-up-arrow me-1"></i>Relatórios</a></li>
-          <li class="nav-item"><a class="nav-link" href="#pagamentos"><i class="bi bi-cash-coin me-1"></i>Pagamentos & Fretes</a></li>
-          <li class="nav-item"><a class="nav-link" href="#chat"><i class="bi bi-chat-dots me-1"></i>Chat</a></li>
-          <li class="nav-item"><a class="nav-link" href="#promocoes"><i class="bi bi-stars me-1"></i>Promoções</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="bi bi-person-gear me-1"></i>Minha conta</a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#">Perfil</a></li>
-              <li><a class="dropdown-item" href="#">Preferências</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item text-danger" href="#">Sair</a></li>
-            </ul>
-          </li>
+      <div class="collapse navbar-collapse" id="topNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-2">
+          <li class="nav-item"><a class="nav-link " href="/PAGINASLOGISTA/home_logista.html">Relatórios</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/PAGINASLOGISTA/cadastro_produtos_logista.html">Produtos</a></li>
+          <li class="nav-item"><a class="nav-link " href="/PAGINASLOGISTA/promocoes_logista.html">Promoções</a></li>
+          <li class="nav-item"><a class="nav-link  " href="/PAGINASLOGISTA/pagamentos_fretes.html">Pagamentos e Fretes</a></li>
+          <li class="nav-item"><a class="nav-link " href="/PAGINASLOGISTA/chat_logista.html">Conversas</a></li>
+      
         </ul>
       </div>
     </div>
-  </header>
+  </nav>
 
   <main class="container-xxl my-4">
     <!-- Cabeçalho da página -->
