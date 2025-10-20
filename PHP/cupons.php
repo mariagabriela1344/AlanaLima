@@ -63,13 +63,13 @@ try {
 
     // Recebendo dados do formulário
     $nome = $_POST["nome"] ?? "";
-    $valor = isset($_POST["valor"]) ? (double)$_POST["valor"] : null;
-    $data_validade = $_POST["data_validade"] ?? "";
-    $quantidade = isset($_POST["quantidade"]) ? (int)$_POST["quantidade"] : null;
+    $valor = (double)$_POST["valor"] ;
+    $data_validade = $_POST["validade"] ?? "";
+    $quantidade = (int)$_POST["quantidade"] ;
 
     // Validação básica
     $erros_validacao = [];
-    if($nome === "" || $valor === null || $data_validade === "" || $quantidade === null){
+    if($nome === "" || $valor <=0 || $data_validade === "" || $quantidade <=0){
         $erros_validacao[] = "Preencha todos os campos corretamente.";
     }
 

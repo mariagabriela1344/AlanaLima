@@ -49,13 +49,13 @@
         <div class="card-body">
           <form action="../PHP/banners.php" method="post" class="row g-3" enctype="multipart/form-data">
             <div class="col-12 col-md-4">
-              <label class="form-label">Imagem do banner</label>
-              <div class="banner-thumb border rounded d-flex align-items-center justify-content-center">
-                <span class="text-muted">Prévia</span>
-              </div>
-              <input type="file" name="imagem"  class="form-control mt-2" accept="image/*" >
-             
-            </div>
+  <label class="form-label">Imagem do banner</label>
+  <div id="previewBanner" class="banner-thumb border rounded d-flex align-items-center justify-content-center" style="height: 180px; overflow: hidden;">
+    <span class="text-muted">Prévia</span>
+  </div>
+  <input type="file" name="imagem" id="inputBanner" class="form-control mt-2" accept="image/*">
+</div>
+
 
             <div class="col-12 col-md-8">
               <div class="row g-3">
@@ -102,34 +102,7 @@
                   <th class="text-end" style="width:170px;">Ações</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td><div class="mini-banner rounded"></div></td>
-                  <td>Semana Promoção imperdivel</td>
-                  <td>/semana-vestidos</td>
-                  <td>Vestidos</td>
-                  <td>31/10/2025</td>
-                  <td class="text-end">
-                    <div class="btn-group btn-group-sm">
-                      <a href="#" class="btn btn-outline-secondary disabled" >Editar</a>
-                      <a href="#" class="btn btn-outline-danger disabled" >Excluir</a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><div class="mini-banner rounded"></div></td>
-                  <td>Frete Grátis Norte</td>
-                  <td>/frete-norte</td>
-                  <td>—</td>
-                  <td>15/11/2025</td>
-                  <td class="text-end">
-                    <div class="btn-group btn-group-sm">
-                      <a href="#" class="btn btn-outline-secondary" >Editar</a>
-                      <a href="#" class="btn btn-outline-danger " >Excluir</a>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
+              <tbody id="listbanners" >              </tbody>
              
             </table>
           </div>
@@ -149,28 +122,28 @@
           <strong>Cadastrar/Atualizar cupom</strong>
         </div>
         <div class="card-body">
-          <form action="../PHP/banners.php" method="post" class="row g-3">
+          <form action="../PHP/cupons.php" method="post" class="row g-3">
             <div class="col-md-4">
               <label class="form-label">Nome do cupom</label>
-              <input type="text" class="form-control" maxlength="45" placeholder="PET10">
+              <input type="text" name="nome"  class="form-control" maxlength="45" placeholder="PET10">
             </div>
             <div class="col-md-4">
               <label class="form-label">Valor (R$ ou %)</label>
-              <input type="number" class="form-control" step="0.01" placeholder="Ex.: 10,00">
+              <input type="number" name="valor" class="form-control" step="0.01" placeholder="Ex.: 10,00">
               
             </div>
             <div class="col-md-4">
               <label class="form-label">Validade</label>
-              <input type="date" class="form-control">
+              <input type="date" name="validade"  class="form-control">
             </div>
             <div class="col-md-4">
               <label class="form-label">Quantidade</label>
-              <input type="number" class="form-control" min="1" placeholder="50">
+              <input type="number" name="quantidade"  class="form-control" min="1" placeholder="50">
             </div>
             <div class="col-12 d-flex gap-2">
               <button type="submit" class="btn btn-primary">Cadastrar</button>
-              <button type="submit" class="btn btn-outline-secondary">Editar</button>
-              <button type="submit" class="btn btn-outline-danger">Excluir</button>
+              <button type="button" class="btn btn-outline-secondary">Editar</button>
+              <button type="button" class="btn btn-outline-danger">Excluir</button>
             </div>
           </form>
         </div>
@@ -188,7 +161,7 @@
                   <th class="text-end" style="width:170px;">Ações</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="listCupom">
                 
               </tbody>
               
@@ -227,9 +200,9 @@
              
             </div>
             <div class="col-12 d-flex gap-2">
-              <button type="submit" class="btn btn-primary">Cadastrar</button>
-              <button type="submit" class="btn btn-outline-secondary">Editar</button>
-              <button type="submit" class="btn btn-outline-danger">Excluir</button>
+              <button type="button" class="btn btn-primary">Cadastrar</button>
+              <button type="button" class="btn btn-outline-secondary">Editar</button>
+              <button type="button" class="btn btn-outline-danger">Excluir</button>
             </div>
           </form>
         </div>
@@ -363,5 +336,6 @@
   </script>
 
   <script src="../JS/banners.js"></script>
+<script src="../JS/cupons.js"></script>
 </body>
 </html>

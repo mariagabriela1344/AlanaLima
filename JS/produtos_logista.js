@@ -20,9 +20,63 @@ function listarcategoria(nomeid){
 })();
 }
 
+function listarProdutos(tabelaClasse) {
+  document.addEventListener('DOMContentLoaded', () => {
+    const tbody = document.querySelector(`.${tabelaClasse} tbody`);
+    const url = '../PHP/cadastro_produtos.php?listar=1&format=json'; // Ajuste para o caminho correto
+
+    const esc = s => String(s || '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+
+    const row = p => {
+      // Pegar primeira imagem se existir
+      const imgHtml = p.imagens && p.imagens.length
+        ? `<img src="data:image/jpeg;base64,${p.imagens[0]}" style="width:72px; height:72px; object-fit:cover;" class="rounded">`
+        : '';
+
+      // Categorias como badges
+      const catsHtml = (p.categorias || []).map(c => `<span class="badge text-bg-light me-1">${esc(c)}</span>`).join('');
+
+      return `
+        <tr>
+          <td>${esc(p.id)}</td>
+          <td><div class="prod-thumb rounded border d-flex align-items-center justify-content-center">${imgHtml}</div></td>
+          <td>${esc(p.nome)}</td>
+          <td>${catsHtml}</td>
+          <td class="text-end">${esc(p.quantidade)}</td>
+          <td class="text-end">R$ ${parseFloat(p.preco).toFixed(2)}</td>
+          <td class="text-end">${p.preco_promocional ? `R$ ${parseFloat(p.preco_promocional).toFixed(2)}` : '—'}</td>
+          <td>${esc(p.codigo)}</td>
+          <td class="text-end">
+            <button class="btn btn-sm btn-warning me-1" data-id="${p.id}"><i class="bi bi-pencil"></i> Editar</button>
+            <button class="btn btn-sm btn-danger" data-id="${p.id}"><i class="bi bi-trash"></i> Excluir</button>
+          </td>
+        </tr>
+      `;
+    };
+
+    fetch(url, { cache: 'no-store' })
+      .then(r => {
+        if (!r.ok) throw new Error(`Erro HTTP: ${r.status}`);
+        return r.json();
+      })
+      .then(d => {
+        if (!d.ok) throw new Error(d.error || 'Erro ao listar produtos');
+        const produtos = d.produtos || [];
+        tbody.innerHTML = produtos.length
+          ? produtos.map(row).join('')
+          : `<tr><td colspan="9" class="text-center text-muted">Nenhum produto cadastrado.</td></tr>`;
+      })
+      .catch(err => {
+        tbody.innerHTML = `<tr><td colspan="9" class="text-center text-danger">Falha ao carregar: ${esc(err.message)}</td></tr>`;
+      });
+  });
+}
+
 listarcategoria("#pCategoria");
 listarcategoria("#prodcat");
-
+listarProdutos("#listprod");
 
 
 

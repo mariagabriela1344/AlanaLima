@@ -11,40 +11,57 @@ function redirecWith($url, $params = []) {
     exit;
 }
 
-function readImageToBlob(?array $file): ?string {
-    if (!$file || $file['error'] !== UPLOAD_ERR_OK) return null;
-    return file_get_contents($file['tmp_name']);
-}
 
 // ===========================
 // LISTAR BANNERS (GET)
 // ===========================
-if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["listar"])) {
-    try {
-        $sql = "
-            SELECT 
-                b.idBanners,
-                b.descricao,
-                b.link,
-                b.data_validade,
-                b.CategoriasProdutos_id,
-                c.nome AS categoria
-            FROM Banners b
-            LEFT JOIN categorias_produtos c 
-                ON c.idCategoriaProduto = b.CategoriasProdutos_id
-            ORDER BY b.idBanners DESC
-        ";
-        $stmt = $pdo->query($sql);
-        $banners = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        header("Content-Type: application/json; charset=utf-8");
-        echo json_encode(["ok" => true, "banners" => $banners], JSON_UNESCAPED_UNICODE);
-        exit;
+// ==============================================
+// FUNÇÃO PARA LER IMAGEM COMO BLOB
+// ==============================================
+function read_image_to_blob(?array $file): ?string {
+  if (!$file || !isset($file['tmp_name']) || $file['error'] !== UPLOAD_ERR_OK) return null;
+  $bin = file_get_contents($file['tmp_name']);
+  return $bin === false ? null : $bin;
+}
+
+// ==============================================
+// LISTAGEM DE BANNERS
+// ==============================================
+if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["listar"])) {
+    header('Content-Type: application/json; charset=utf-8');
+
+    try {
+        // Consulta a tabela correta e campos corretos
+        $stmt = $pdo->query("
+            SELECT idBanners, imagem, data_validade, descricao, link, CategoriasProdutos_id 
+            FROM Banners 
+            ORDER BY idBanners DESC
+        ");
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $banners = array_map(function ($r) {
+            return [
+                'idBanners'   => (int)$r['idBanners'],
+                'imagem'      => !empty($r['imagem']) ? base64_encode($r['imagem']) : null,
+                'data_validade' => $r['data_validade'],
+                'descricao'   => $r['descricao'],
+                'link'        => $r['link'],
+                'categoria_id'=> $r['CategoriasProdutos_id']
+            ];
+        }, $rows);
+
+        echo json_encode([
+            'ok' => true,
+            'count' => count($banners),
+            'banners' => $banners
+        ], JSON_UNESCAPED_UNICODE);
     } catch (Throwable $e) {
-        header("Content-Type: application/json; charset=utf-8", true, 500);
-        echo json_encode(["ok" => false, "erro" => $e->getMessage()], JSON_UNESCAPED_UNICODE);
-        exit;
+        http_response_code(500);
+        echo json_encode(['ok' => false, 'error' => $e->getMessage()]);
     }
+
+    exit;
 }
 
 // ===========================
