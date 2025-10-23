@@ -132,6 +132,104 @@ foreach ($idsImagens as $idImg) {
     ]);
   }
 
+
+
+
+
+/*  ============================ATUALIZAÇÃO=========================== */
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['acao'] ?? '') === 'atualizar') {
+  try {
+    $id        = (int)($_POST['id'] ?? 0);
+    $nome = trim($_POST['nomeproduto'] ?? '');
+    $descricao = trim($_POST['descricao'] ?? '');
+    $quantidade = trim($_POST['quantidade'] ?? '');
+    $preco    = trim($_POST['preço'] ?? '');
+    $cor = trim($_POST['cor'] ?? '');
+    $código= trim($_POST['código'] ?? '');
+    $preco_promocional = trim($_POST['preço_promocional'] ?? '');
+    $tamanho = $_POST['tamanho'] ?? null;
+    $categoria = ($categoria === '' || $categoria === null) ? null : (int)$categoria;
+
+    if ($id <= 0) {
+      redirect_with('../PAGINAS_LOGISTA/cadastro_produtos_logista.html', ['erro_produto' => 'ID inválido para edição.']);
+    }
+
+    // Lê (se houver) nova imagem
+    $imgBlob = read_image_to_blob($_FILES['foto'] ?? null);
+
+    // validações mínimas (iguais ao cadastro)
+    $erros = [];
+    if ($descricao === '') { $erros[] = 'Informe a descrição.'; }
+    elseif (mb_strlen($descricao) > 45) { $erros[] = 'Descrição deve ter no máximo 45 caracteres.'; }
+
+    $dt = DateTime::createFromFormat('Y-m-d', $dataVal);
+    if (!($dt && $dt->format('Y-m-d') === $dataVal)) { $erros[] = 'Data de validade inválida (use YYYY-MM-DD).'; }
+
+    if ($link !== '' && mb_strlen($link) > 45) { $erros[] = 'Link deve ter no máximo 45 caracteres.'; }
+
+    if ($erros) {
+      redirect_with('../PAGINAS_LOGISTA/cadastro_produtos_logista.html', ['erro_produto' => implode(' ', $erros)]);
+    }
+
+    // Monta UPDATE dinâmico (atualiza imagem só se uma nova foi enviada)
+    $setSql = "descricao = :desc, data_validade = :dt, link = :lnk, CategoriasProdutos_id = :cat";
+    if ($imgBlob !== null) {
+      $setSql = "imagem = :img, " . $setSql;
+    }
+
+    $sql = "UPDATE Produto
+              SET $setSql
+            WHERE idProdutos = :idProdutos";
+
+    $st = $pdo->prepare($sql);
+
+
+    $st->bindValue(':desc', $descricao, PDO::PARAM_STR);
+    $st->bindValue(':dt',   $quantidade,   PDO::PARAM_STR);
+
+
+    if ($categoria === null) {
+      $st->bindValue(':cat', null, PDO::PARAM_NULL);
+    } else {
+      $st->bindValue(':cat', $categoria, PDO::PARAM_INT);
+    }
+
+    $st->bindValue(':id', $id, PDO::PARAM_INT);
+    $st->execute();
+
+    redirect_with('../PAGINAS_LOGISTA/cadastro_produtos_logista.html', ['editar_produto' => 'ok']);
+
+  } catch (Throwable $e) {
+    redirect_with('../PAGINAS_LOGISTA/cadastro_produtos_logista.html', ['erro_produto' => 'Erro ao editar: ' . $e->getMessage()]);
+  }
+}
+
+
+
+
+
+/*  ============================EXCLUSÃO=========================== */
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['acao'] ?? '') === 'excluir') {
+  try {
+    $id = (int)($_POST['id'] ?? 0);
+    if ($id <= 0) {
+      redirect_with('../PAGINAS_LOGISTA/banners_logista.html', ['erro_banner' => 'ID inválido para exclusão.']);
+    }
+
+    $st = $pdo->prepare("DELETE FROM Banners WHERE idBanners = :id");
+    $st->bindValue(':id', $id, PDO::PARAM_INT);
+    $st->execute();
+
+    redirect_with('../PAGINAS_LOGISTA/cadastro_produtos_logista.html', ['excluir_produtos' => 'ok']);
+
+  } catch (Throwable $e) {
+    redirect_with('../PAGINAS_LOGISTA/cadastro_produtos_logista.html', ['erro_produtos' => 'Erro ao excluir: ' . $e->getMessage()]);
+  }
+}
+
+
+
+
   // Confirmar transação
   $pdo->commit();
 

@@ -1,12 +1,16 @@
 <?php
-// Conectando ao banco de dados
-require_once __DIR__ ."/conexao.php";
+// ==============================================
+// CONEXÃO COM O BANCO DE DADOS
+// ==============================================
+require_once __DIR__ . "/conexao.php";
 
-// Função para redirecionamento
-function redirecWith($url, $params = []) {
-    if(!empty($params)){
+// ==============================================
+// FUNÇÃO DE REDIRECIONAMENTO
+// ==============================================
+function redirect_with($url, $params = []) {
+    if (!empty($params)) {
         $qs = http_build_query($params);
-        $sep = (strpos($url,'?') === false) ? '?' : '&';
+        $sep = (strpos($url, '?') === false) ? '?' : '&';
         $url .= $sep . $qs;
     }
     header("Location: $url");
@@ -14,41 +18,26 @@ function redirecWith($url, $params = []) {
 }
 
 // ==============================================
-// LISTAGEM DE CUPONS
+// LISTAGEM DE CUPONS (JSON PARA JS)
 // ==============================================
 if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["listar"])) {
+    header("Content-Type: application/json; charset=utf-8");
     try {
-        $sqlListar = "SELECT idCupom AS id, nome, valor, data_validade, quantidade 
-                      FROM Cupom ORDER BY nome";
+        $stmt = $pdo->query("SELECT idCupom AS id, nome, valor, data_validade, quantidade 
+                             FROM Cupom ORDER BY nome");
+        $cupons = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $stmtListar = $pdo->query($sqlListar);
-        $listar = $stmtListar->fetchAll(PDO::FETCH_ASSOC);
-
-        $formato = isset($_GET["format"]) ? strtolower($_GET["format"]) : "option";
-
-        if ($formato === "json") {
-            header("Content-Type: application/json; charset=utf-8");
-            echo json_encode(["ok" => true, "cupons" => $listar], JSON_UNESCAPED_UNICODE);
-            exit;
-        }
-
-        header('Content-Type: text/html; charset=utf-8');
-        foreach ($listar as $cupom) {
-            $id   = (int)$cupom["id"];
-            $nome = htmlspecialchars($cupom["nome"], ENT_QUOTES, "UTF-8");
-            echo "<option value=\"{$id}\">{$nome} - R$ {$cupom['valor']}</option>\n";
-        }
+        echo json_encode([
+            "ok" => true,
+            "cupons" => $cupons
+        ], JSON_UNESCAPED_UNICODE);
         exit;
-
     } catch (Throwable $e) {
-        if ($formato === "json") {
-            header('Content-Type: application/json; charset=utf-8', true, 500);
-            echo json_encode(['ok' => false, 'error' => 'Erro ao listar cupons', 
-                             'detail' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
-        } else {
-            header('Content-Type: text/html; charset=utf-8', true, 500);
-            echo "<option disabled>Erro ao carregar cupons</option>";
-        }
+        echo json_encode([
+            "ok" => false,
+            "error" => "Erro ao listar cupons",
+            "detail" => $e->getMessage()
+        ], JSON_UNESCAPED_UNICODE);
         exit;
     }
 }
@@ -56,45 +45,104 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["listar"])) {
 // ==============================================
 // CADASTRO DE CUPOM
 // ==============================================
-try {
-    if($_SERVER["REQUEST_METHOD"] !== "POST"){
-        redirecWith("../paginaslogista/promocoes_logista.html", ["erro" => "Método inválido"]);
+if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["acao"] ?? "") === "cadastrar") {
+    try {
+        $nome = trim($_POST["nome"] ?? "");
+        $valor = floatval($_POST["valor"] ?? 0);
+        $data_validade = trim($_POST["data_validade"] ?? "");
+        $quantidade = intval($_POST["quantidade"] ?? 0);
+
+        // Validação básica
+        $erros = [];
+        if ($nome === "") $erros[] = "Informe o nome do cupom.";
+        if ($valor <= 0) $erros[] = "Informe um valor válido.";
+        if ($data_validade === "") $erros[] = "Informe a data de validade.";
+        if ($quantidade <= 0) $erros[] = "Informe a quantidade.";
+
+        if (!empty($erros)) {
+            redirect_with("../paginaslogista/promocoes_logista.html", ["erro_cupom" => implode(" ", $erros)]);
+        }
+
+        $sql = "INSERT INTO Cupom (nome, valor, data_validade, quantidade) 
+                VALUES (:nome, :valor, :data_validade, :quantidade)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ":nome" => $nome,
+            ":valor" => $valor,
+            ":data_validade" => $data_validade,
+            ":quantidade" => $quantidade
+        ]);
+
+        redirect_with("../paginaslogista/promocoes_logista.html", ["cadastro_cupom" => "ok"]);
+
+    } catch (Throwable $e) {
+        redirect_with("../paginaslogista/promocoes_logista.html", ["erro_cupom" => "Erro ao cadastrar: ".$e->getMessage()]);
     }
-
-    // Recebendo dados do formulário
-    $nome = $_POST["nome"] ?? "";
-    $valor = (double)$_POST["valor"] ;
-    $data_validade = $_POST["validade"] ?? "";
-    $quantidade = (int)$_POST["quantidade"] ;
-
-    // Validação básica
-    $erros_validacao = [];
-    if($nome === "" || $valor <=0 || $data_validade === "" || $quantidade <=0){
-        $erros_validacao[] = "Preencha todos os campos corretamente.";
-    }
-
-    if(!empty($erros_validacao)){
-        redirecWith("../paginaslogista/promocoes_logista.html", ["erro" => implode(", ", $erros_validacao)]);
-    }
-
-    // Inserção no banco de dados
-    $sql = "INSERT INTO Cupom (nome, valor, data_validade, quantidade) 
-            VALUES (:nome, :valor, :data_validade, :quantidade)";
-    
-    $inserir = $pdo->prepare($sql)->execute([
-        ":nome" => $nome,
-        ":valor" => $valor,
-        ":data_validade" => $data_validade,
-        ":quantidade" => $quantidade
-    ]);
-
-    if($inserir){
-        redirecWith("../paginaslogista/promocoes_logista.html", ["cadastro" => "ok"]);
-    } else {
-        redirecWith("../paginaslogista/promocoes_logista.html", ["erro" => "Erro ao cadastrar no banco de dados"]);
-    }
-
-} catch(Exception $e){
-    redirecWith("../paginaslogista/promocoes_logista.html", ["erro" => "Erro no banco de dados: ".$e->getMessage()]);
 }
+
+// ==============================================
+// EDIÇÃO DE CUPOM
+// ==============================================
+if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["acao"] ?? "") === "atualizar") {
+    try {
+        $id = intval($_POST["id"] ?? 0);
+        $nome = trim($_POST["nome"] ?? "");
+        $valor = floatval($_POST["valor"] ?? 0);
+        $data_validade = trim($_POST["data_validade"] ?? "");
+        $quantidade = intval($_POST["quantidade"] ?? 0);
+
+        if ($id <= 0) {
+            redirect_with("../paginaslogista/promocoes_logista.html", ["erro_cupom" => "ID inválido para edição."]);
+        }
+
+        $erros = [];
+        if ($nome === "") $erros[] = "Informe o nome do cupom.";
+        if ($valor <= 0) $erros[] = "Informe um valor válido.";
+        if ($data_validade === "") $erros[] = "Informe a data de validade.";
+        if ($quantidade <= 0) $erros[] = "Informe a quantidade.";
+
+        if (!empty($erros)) {
+            redirect_with("../paginaslogista/promocoes_logista.html", ["erro_cupom" => implode(" ", $erros)]);
+        }
+
+        $sql = "UPDATE Cupom 
+                SET nome = :nome, valor = :valor, data_validade = :data_validade, quantidade = :quantidade
+                WHERE idCupom = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ":nome" => $nome,
+            ":valor" => $valor,
+            ":data_validade" => $data_validade,
+            ":quantidade" => $quantidade,
+            ":id" => $id
+        ]);
+
+        redirect_with("../paginaslogista/promocoes_logista.html", ["editar_cupom" => "ok"]);
+
+    } catch (Throwable $e) {
+        redirect_with("../paginaslogista/promocoes_logista.html", ["erro_cupom" => "Erro ao editar: ".$e->getMessage()]);
+    }
+}
+
+// ==============================================
+// EXCLUSÃO DE CUPOM
+// ==============================================
+if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["acao"] ?? "") === "excluir") {
+    try {
+        $id = intval($_POST["id"] ?? 0);
+        if ($id <= 0) {
+            redirect_with("../paginaslogista/promocoes_logista.html", ["erro_cupom" => "ID inválido para exclusão."]);
+        }
+
+        $stmt = $pdo->prepare("DELETE FROM Cupom WHERE idCupom = :id");
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        redirect_with("../paginaslogista/promocoes_logista.html", ["excluir_cupom" => "ok"]);
+
+    } catch (Throwable $e) {
+        redirect_with("../paginaslogista/promocoes_logista.html", ["erro_cupom" => "Erro ao excluir: ".$e->getMessage()]);
+    }
+}
+
 ?>
