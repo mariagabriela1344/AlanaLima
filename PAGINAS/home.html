@@ -55,34 +55,27 @@
 
   <main>
     <!-- Banners -->
-    <section class="container-xxl my-3 my-lg-4">
-      <div id="heroCarousel" class="carousel slide hero rounded-3 overflow-hidden shadow-sm" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-label="Banner 1"></button>
-          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Banner 2"></button>
-          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Banner 3"></button>
+     <div id="carouselBanners" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-indicators" id="banners-indicators"></div>
+      <div class="carousel-inner" id="banners-home">
+        <!-- Itens serão inseridos via JS -->
+        <div class="carousel-item active">
+          <div class="p-3 text-muted">Carregando banners…</div>
         </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="4500">
-            <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1600&auto=format&fit=crop" class="d-block w-100" alt="Coleção Casual">
-          </div>
-          <div class="carousel-item" data-bs-interval="4500">
-            <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=80&w=1600&auto=format&fit=crop" class="d-block w-100" alt="Novidades">
-          </div>
-          <div class="carousel-item" data-bs-interval="4500">
-            <img src="https://images.unsplash.com/photo-1520975922323-254f5329b660?q=80&w=1600&auto=format&fit=crop" class="d-block w-100" alt="Acessórios">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Próximo</span>
-        </button>
       </div>
-    </section>
+
+      <button class="carousel-control-prev" type="button"
+              data-bs-target="#carouselBanners" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+
+      <button class="carousel-control-next" type="button"
+              data-bs-target="#carouselBanners" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+    </div>
 
     <!-- Categorias -->
     <section class="container-xxl my-4">
@@ -235,5 +228,10 @@
     // ano no rodapé
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
+<!--Seu JS-->
+<script src="../JS/home_cliente.js" ></script>
+
+
+
 </body>
 </html>

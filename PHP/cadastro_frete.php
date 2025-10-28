@@ -71,72 +71,44 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["listar"])) {
 }
 
 /*  ============================ATUALIZAÇÃO=========================== */
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['acao'] ?? '') === 'atualizar') 
-  try {
-    $id        = (int)($_POST['id'] ?? 0);
-    $bairro = trim($_POST['bairro'] ?? '');
-    $Valor = trim($_POST['Valor'] ?? '');
-    $transportadora   = trim($_POST['transportadora'] ?? '');
-    $categoria = ($categoria === '' || $categoria === null) ? null : (int)$categoria;
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['acao'] ?? '') === 'atualizar') {
+    try {
+        $id = (int)($_POST['id'] ?? 0);
+        $bairro = trim($_POST['bairro'] ?? '');
+        $valor = (float)($_POST['valor'] ?? 0);
+        $transportadora = trim($_POST['transportadora'] ?? '');
 
-    if ($id <= 0) {
-      redirect_with('../PAGINAS_LOGISTA/pagamentos_fretes.html', ['erro_frete' => 'ID inválido para edição.']);
+        if ($id <= 0) {
+            redirecWith('../PAGINAS_LOGISTA/pagamentos_fretes.html', ['erro_frete' => 'ID inválido para edição.']);
+        }
+
+        $erros = [];
+        if ($bairro === '') $erros[] = 'Informe o bairro.';
+        if ($valor <= 0) $erros[] = 'Informe um valor válido.';
+        if ($transportadora === '') $erros[] = 'Informe a transportadora.';
+
+        if ($erros) {
+            redirecWith('../PAGINAS_LOGISTA/pagamentos_fretes.html', ['erro_frete' => implode(' ', $erros)]);
+        }
+
+        $sql = "UPDATE Fretes
+                   SET bairro = :bairro,
+                       valor = :valor,
+                       transportadora = :transportadora
+                 WHERE idFretes = :id";
+        $st = $pdo->prepare($sql);
+        $st->bindValue(':bairro', $bairro, PDO::PARAM_STR);
+        $st->bindValue(':valor', $valor);
+        $st->bindValue(':transportadora', $transportadora, PDO::PARAM_STR);
+        $st->bindValue(':id', $id, PDO::PARAM_INT);
+        $st->execute();
+
+        redirecWith('../PAGINAS_LOGISTA/pagamentos_fretes.html', ['editar_frete' => 'ok']);
+
+    } catch (Throwable $e) {
+        redirecWith('../PAGINAS_LOGISTA/pagamentos_fretes.html', ['erro_frete' => 'Erro ao editar: ' . $e->getMessage()]);
     }
-
-    
-    // validações mínimas (iguais ao cadastro)
-    $erros = [];
-    if ($bairro === '') { $erros[] = 'Informe o bairro.'; }
-    elseif (mb_strlen($bairro) > 1) { $erros[] = 'o bairro deve ter pelo menos uma informação.'; }
-
-    $valor= DateTime::createFromFormat('Y-m-d', $valor);
-    if (!($dt && $dt->format('Y-m-d') === $valor)) { $erros[] = 'valor inválido (use YYYY-MM-DD).'; }
-
-     if ($transportadora === '') { $erros[] = 'Informe a transportadora.'; }
-    elseif (mb_strlen($transportadora) > 0) { 
-
-
-
-    if ($erros) {
-      redirect_with('../PAGINAS_LOGISTA/pagamentos_fretes.html', ['erro_frete' => implode(' ', $erros)]);
-    }
-
-    // Monta UPDATE dinâmico (atualiza imagem só se uma nova foi enviada)
-    $setSql = "descricao = :desc, data_validade = :dt, link = :lnk, CategoriasProdutos_id = :cat";
-    if ($imgBlob !== null) {
-      $setSql = "imagem = :img, " . $setSql;
-    }
-
-    $sql = "UPDATE Fretes
-              SET $setSql
-            WHERE idfretes = :idFretes";
-
-    $st = $pdo->prepare($sql);
-
-    
-
-    $st->bindValue(':desc', $bairro, PDO::PARAM_STR);
-    $st->bindValue(':dt',   $valor,   PDO::PARAM_STR);
-
-    
-
-    if ($categoria === null) {
-      $st->bindValue(':cat', null, PDO::PARAM_NULL);
-    } else {
-      $st->bindValue(':cat', $categoria, PDO::PARAM_INT);
-    }
-
-    $st->bindValue(':id', $id, PDO::PARAM_INT);
-    $st->execute();
-
-    redirect_with('../PAGINAS_LOGISTA/pagamentos_fretes.html', ['editar_banner' => 'ok']);
-
-  } catch (Throwable $e) {
-    redirect_with('../PAGINAS_LOGISTA/pagamentos_fretes.html', ['erro_banner' => 'Erro ao editar: ' . $e->getMessage()]);
-  }
 }
-
-
 
 
 /*  ============================EXCLUSÃO=========================== */
