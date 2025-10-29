@@ -20,16 +20,19 @@
             <!-- LOGIN (70%) -->
             <section class="col-12 login-col d-flex align-items-center justify-content-center">
                 <div class="form-card shadow-sm">
-                    <form id="form-login" class="w-100" id="form-login">
+                    <form id="form-login" class="w-100">
 
                         <div class="mb-3">
-                            <label for="cnpj" class="form-label label-small">CPF/CNPJ:</label>
-                            <input name="cnpj" type="text" id="cnpj" class="form-control form-control-lg input-pill" />
+                            <label for="cpf" class="form-label label-small">CPF/CNPJ:</label>
+                            <input name="cpf" type="text" id="cpf" class="form-control form-control-lg input-pill"
+                                placeholder="Digite seu CPF ou CNPJ" autocomplete="username" />
                         </div>
 
                         <div class="mb-4">
                             <label for="senha" class="form-label label-small">Senha</label>
-                            <input type="password" id="senha" class="form-control form-control-lg input-pill" />
+                            <input type="password" id="senha" name="senha"
+                                class="form-control form-control-lg input-pill" placeholder="Digite sua senha"
+                                autocomplete="current-password" />
                         </div>
 
                         <div class="d-grid">
